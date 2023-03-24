@@ -34,7 +34,7 @@
             roundLabel = new Label();
             comboBox1 = new ComboBox();
             unplayedOnlyCheckbox = new CheckBox();
-            listBox1 = new ListBox();
+            ListBox = new ListBox();
             teamOneName = new Label();
             teamOneScoreLabel = new Label();
             TeamOneScoreValue = new TextBox();
@@ -42,7 +42,7 @@
             TeamTwoScoreLabel = new Label();
             teamTwoName = new Label();
             versusLabel = new Label();
-            button1 = new Button();
+            scoreButton = new Button();
             SuspendLayout();
             // 
             // headerLabel
@@ -107,16 +107,16 @@
             unplayedOnlyCheckbox.UseVisualStyleBackColor = true;
             unplayedOnlyCheckbox.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // listBox1
+            // ListBox
             // 
-            listBox1.BorderStyle = BorderStyle.FixedSingle;
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 30;
-            listBox1.Location = new Point(49, 190);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(300, 182);
-            listBox1.TabIndex = 5;
-            listBox1.Tag = "matchupListbox";
+            ListBox.BorderStyle = BorderStyle.FixedSingle;
+            ListBox.FormattingEnabled = true;
+            ListBox.ItemHeight = 30;
+            ListBox.Location = new Point(49, 190);
+            ListBox.Name = "ListBox";
+            ListBox.Size = new Size(300, 182);
+            ListBox.TabIndex = 5;
+            ListBox.Tag = "matchupListbox";
             // 
             // teamOneName
             // 
@@ -202,22 +202,28 @@
             versusLabel.Text = "-VS-";
             versusLabel.Click += label1_Click_1;
             // 
-            // button1
+            // scoreButton
             // 
-            button1.Location = new Point(593, 288);
-            button1.Name = "button1";
-            button1.Size = new Size(107, 46);
-            button1.TabIndex = 13;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            scoreButton.FlatAppearance.BorderColor = Color.Silver;
+            scoreButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
+            scoreButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
+            scoreButton.FlatStyle = FlatStyle.Flat;
+            scoreButton.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            scoreButton.ForeColor = SystemColors.MenuHighlight;
+            scoreButton.Location = new Point(593, 288);
+            scoreButton.Name = "scoreButton";
+            scoreButton.Size = new Size(107, 46);
+            scoreButton.TabIndex = 13;
+            scoreButton.Text = "Score";
+            scoreButton.UseVisualStyleBackColor = true;
             // 
             // TournamentViewerForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(701, 607);
-            Controls.Add(button1);
+            ClientSize = new Size(721, 638);
+            Controls.Add(scoreButton);
             Controls.Add(versusLabel);
             Controls.Add(TeamTwoScoreValue);
             Controls.Add(TeamTwoScoreLabel);
@@ -225,7 +231,7 @@
             Controls.Add(TeamOneScoreValue);
             Controls.Add(teamOneScoreLabel);
             Controls.Add(teamOneName);
-            Controls.Add(listBox1);
+            Controls.Add(ListBox);
             Controls.Add(unplayedOnlyCheckbox);
             Controls.Add(comboBox1);
             Controls.Add(roundLabel);
@@ -248,7 +254,7 @@
         private Label roundLabel;
         private ComboBox comboBox1;
         private CheckBox unplayedOnlyCheckbox;
-        private ListBox listBox1;
+        private ListBox ListBox;
         private Label teamOneName;
         private Label teamOneScoreLabel;
         private TextBox TeamOneScoreValue;
@@ -256,6 +262,6 @@
         private Label TeamTwoScoreLabel;
         private Label teamTwoName;
         private Label versusLabel;
-        private Button button1;
+        private Button scoreButton;
     }
 }
