@@ -9,7 +9,7 @@
         /// The list of the competiting teams in this match.
         /// </summary>
         public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
-        
+
         /// <summary>
         /// The winner of the match.
         /// </summary>
