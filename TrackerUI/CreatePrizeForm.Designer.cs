@@ -62,6 +62,7 @@
             placeNumberValue.Size = new Size(162, 35);
             placeNumberValue.TabIndex = 14;
             placeNumberValue.Tag = "";
+            placeNumberValue.TextChanged += placeNumberValue_TextChanged;
             // 
             // placeNumberLabel
             // 
@@ -83,6 +84,7 @@
             placeNameValue.Size = new Size(162, 35);
             placeNameValue.TabIndex = 16;
             placeNameValue.Tag = "";
+            placeNameValue.TextChanged += placeNameValue_TextChanged;
             // 
             // placeNameLabel
             // 

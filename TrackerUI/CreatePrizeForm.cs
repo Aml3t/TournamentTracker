@@ -36,16 +36,33 @@ namespace TrackerUI
         {
             bool output = true;
             int placeNumber = 0;
+            decimal prizeNumber = 1.0m;
             bool placeNumberValidNumber = int.TryParse(placeNameValue.Text, out placeNumber);
+            bool prizeNumberValidNumber = decimal.TryParse(prizeAmountValue.Text, out prizeNumber);
 
-            if(!placeNumberValidNumber)
+            if (!placeNumberValidNumber)
             {
                 output = false;
+                Console.WriteLine("Your place number is not valid.");
             }
 
             if (placeNumber < 1)
             {
                 output = false;
+                Console.WriteLine("Your place number is not valid.");
+
+            }
+
+            if (placeNameValue.Text.Length == 0)
+            {
+                output = false;
+                Console.WriteLine("Your place name is not valid.");
+            }
+
+            if (prizeNumber <= 0)
+            {
+                output = false;
+                Console.WriteLine("Your prize amount is not valid.");
             }
 
             return output;
@@ -58,6 +75,16 @@ namespace TrackerUI
         }
 
         private void prizeAmountValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void placeNumberValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void placeNameValue_TextChanged(object sender, EventArgs e)
         {
 
         }
