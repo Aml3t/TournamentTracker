@@ -36,7 +36,7 @@
             placeNameLabel = new Label();
             prizeAmountValue = new TextBox();
             prizeAmountLabel = new Label();
-            privePercentageValue = new TextBox();
+            pricePercentageValue = new TextBox();
             privePercentageLabel = new Label();
             orLabel = new Label();
             createPrizeButton = new Button();
@@ -121,14 +121,14 @@
             prizeAmountLabel.Tag = "";
             prizeAmountLabel.Text = "Price Amount";
             // 
-            // privePercentageValue
+            // pricePercentageValue
             // 
-            privePercentageValue.Location = new Point(273, 412);
-            privePercentageValue.Name = "privePercentageValue";
-            privePercentageValue.Size = new Size(162, 35);
-            privePercentageValue.TabIndex = 20;
-            privePercentageValue.Tag = "";
-            privePercentageValue.TextChanged += privePercentageValue_TextChanged;
+            pricePercentageValue.Location = new Point(273, 412);
+            pricePercentageValue.Name = "pricePercentageValue";
+            pricePercentageValue.Size = new Size(162, 35);
+            pricePercentageValue.TabIndex = 20;
+            pricePercentageValue.Tag = "";
+            pricePercentageValue.TextChanged += privePercentageValue_TextChanged;
             // 
             // privePercentageLabel
             // 
@@ -181,7 +181,7 @@
             ClientSize = new Size(511, 618);
             Controls.Add(createPrizeButton);
             Controls.Add(orLabel);
-            Controls.Add(privePercentageValue);
+            Controls.Add(pricePercentageValue);
             Controls.Add(privePercentageLabel);
             Controls.Add(prizeAmountValue);
             Controls.Add(prizeAmountLabel);
@@ -208,7 +208,7 @@
         private Label placeNameLabel;
         private TextBox prizeAmountValue;
         private Label prizeAmountLabel;
-        private TextBox privePercentageValue;
+        private TextBox pricePercentageValue;
         private Label privePercentageLabel;
         private Label orLabel;
         private Button createPrizeButton;

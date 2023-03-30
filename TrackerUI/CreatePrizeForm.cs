@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 
 namespace TrackerUI
 {
@@ -29,6 +30,18 @@ namespace TrackerUI
 
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
+            if(ValidateForm())
+            {
+                PrizeModel model = new PrizeModel();
+
+                model.PlaceName = placeNameValue.Text;
+                model.PlaceNumber = placeNumberValue.Text;
+                
+                
+                
+               // Console.WriteLine("Prize created");
+
+            }
 
         }
 
@@ -36,9 +49,7 @@ namespace TrackerUI
         {
             bool output = true;
             int placeNumber = 0;
-            decimal prizeNumber = 1.0m;
             bool placeNumberValidNumber = int.TryParse(placeNameValue.Text, out placeNumber);
-            bool prizeNumberValidNumber = decimal.TryParse(prizeAmountValue.Text, out prizeNumber);
 
             if (!placeNumberValidNumber)
             {
@@ -59,14 +70,31 @@ namespace TrackerUI
                 Console.WriteLine("Your place name is not valid.");
             }
 
-            if (prizeNumber <= 0)
+            decimal prizeAmount = 0;
+            int pricePercentage = 0;
+
+            bool prizeAmountValidNumber = decimal.TryParse(prizeAmountValue.Text, out prizeAmount);
+            bool prizePercentageValidNumber = int.TryParse(pricePercentageValue.Text, out pricePercentage);
+
+            if ( !prizeAmountValidNumber || !prizePercentageValidNumber)
             {
                 output = false;
-                Console.WriteLine("Your prize amount is not valid.");
+                Console.WriteLine("Not valid input.");
+            }
+
+            if (prizeAmount <= 0 && pricePercentage <= 0)
+            {
+                output = false;
+                Console.WriteLine("Not valid input.");
+            }
+
+            if (pricePercentage < 0 || pricePercentage > 100)
+            {
+                output = false;
+                Console.WriteLine("Not valid input.");
             }
 
             return output;
-
         }
 
         private void privePercentageValue_TextChanged(object sender, EventArgs e)
