@@ -24,10 +24,15 @@
         /// <summary>
         /// The percentage of the prize that should be given.
         /// </summary>
-        public double PricePercentage { get; set; }
+        public double PrizePercentage { get; set; }
+
+        public PrizeModel()
+        {
+            
+        }
 
         public PrizeModel(string placeName, string placeNumber,
-                          string prizeAmount, string pricePercentage)
+                          string prizeAmount, string prizePercentage)
         {
             PlaceName = placeName;
 
@@ -36,7 +41,12 @@
             PlaceNumber = placeNumberValue;
 
             decimal prizeAmountValue = 0;
-            int.TryParse(prizeAmount, out prizeAmountValue);
+            decimal.TryParse(prizeAmount, out prizeAmountValue);
+            PrizeAmount = prizeAmountValue;
+
+            double pricePercentageValue = 0;
+            double.TryParse(prizePercentage, out pricePercentageValue);
+            PrizePercentage = pricePercentageValue;
             
         }
     }

@@ -36,8 +36,8 @@
             placeNameLabel = new Label();
             prizeAmountValue = new TextBox();
             prizeAmountLabel = new Label();
-            pricePercentageValue = new TextBox();
-            privePercentageLabel = new Label();
+            prizePercentageValue = new TextBox();
+            prizePercentageLabel = new Label();
             orLabel = new Label();
             createPrizeButton = new Button();
             SuspendLayout();
@@ -106,6 +106,7 @@
             prizeAmountValue.Size = new Size(162, 35);
             prizeAmountValue.TabIndex = 18;
             prizeAmountValue.Tag = "";
+            prizeAmountValue.Text = "0";
             prizeAmountValue.TextChanged += prizeAmountValue_TextChanged;
             // 
             // prizeAmountLabel
@@ -116,32 +117,34 @@
             prizeAmountLabel.ForeColor = SystemColors.MenuHighlight;
             prizeAmountLabel.Location = new Point(55, 222);
             prizeAmountLabel.Name = "prizeAmountLabel";
+            prizeAmountLabel.RightToLeft = RightToLeft.No;
             prizeAmountLabel.Size = new Size(176, 37);
             prizeAmountLabel.TabIndex = 17;
             prizeAmountLabel.Tag = "";
-            prizeAmountLabel.Text = "Price Amount";
+            prizeAmountLabel.Text = "Prize Amount";
             // 
-            // pricePercentageValue
+            // prizePercentageValue
             // 
-            pricePercentageValue.Location = new Point(273, 412);
-            pricePercentageValue.Name = "pricePercentageValue";
-            pricePercentageValue.Size = new Size(162, 35);
-            pricePercentageValue.TabIndex = 20;
-            pricePercentageValue.Tag = "";
-            pricePercentageValue.TextChanged += privePercentageValue_TextChanged;
+            prizePercentageValue.Location = new Point(273, 412);
+            prizePercentageValue.Name = "prizePercentageValue";
+            prizePercentageValue.Size = new Size(162, 35);
+            prizePercentageValue.TabIndex = 20;
+            prizePercentageValue.Tag = "";
+            prizePercentageValue.Text = "0";
+            prizePercentageValue.TextChanged += privePercentageValue_TextChanged;
             // 
-            // privePercentageLabel
+            // prizePercentageLabel
             // 
-            privePercentageLabel.AutoSize = true;
-            privePercentageLabel.BackColor = Color.White;
-            privePercentageLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            privePercentageLabel.ForeColor = SystemColors.MenuHighlight;
-            privePercentageLabel.Location = new Point(55, 410);
-            privePercentageLabel.Name = "privePercentageLabel";
-            privePercentageLabel.Size = new Size(212, 37);
-            privePercentageLabel.TabIndex = 19;
-            privePercentageLabel.Tag = "";
-            privePercentageLabel.Text = "Price Percentage";
+            prizePercentageLabel.AutoSize = true;
+            prizePercentageLabel.BackColor = Color.White;
+            prizePercentageLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            prizePercentageLabel.ForeColor = SystemColors.MenuHighlight;
+            prizePercentageLabel.Location = new Point(55, 410);
+            prizePercentageLabel.Name = "prizePercentageLabel";
+            prizePercentageLabel.Size = new Size(212, 37);
+            prizePercentageLabel.TabIndex = 19;
+            prizePercentageLabel.Tag = "";
+            prizePercentageLabel.Text = "Prize Percentage";
             // 
             // orLabel
             // 
@@ -181,8 +184,8 @@
             ClientSize = new Size(511, 618);
             Controls.Add(createPrizeButton);
             Controls.Add(orLabel);
-            Controls.Add(pricePercentageValue);
-            Controls.Add(privePercentageLabel);
+            Controls.Add(prizePercentageValue);
+            Controls.Add(prizePercentageLabel);
             Controls.Add(prizeAmountValue);
             Controls.Add(prizeAmountLabel);
             Controls.Add(placeNameValue);
@@ -195,6 +198,7 @@
             Margin = new Padding(5, 6, 5, 6);
             Name = "CreatePrizeForm";
             Text = "Create Prize";
+            Load += CreatePrizeForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,8 +212,8 @@
         private Label placeNameLabel;
         private TextBox prizeAmountValue;
         private Label prizeAmountLabel;
-        private TextBox pricePercentageValue;
-        private Label privePercentageLabel;
+        private TextBox prizePercentageValue;
+        private Label prizePercentageLabel;
         private Label orLabel;
         private Button createPrizeButton;
     }

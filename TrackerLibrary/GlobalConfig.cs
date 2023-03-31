@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace TrackerLibrary
                 // TODO - Create the SQL Connection
                 SqlConnector sql = new SqlConnector();
                 Connections.Add(sql);
+                //string information = "SQL";
 
             }
 

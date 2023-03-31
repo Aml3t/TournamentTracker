@@ -30,68 +30,78 @@ namespace TrackerUI
 
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
-            if(ValidateForm())
+            if (ValidateForm())
             {
-                PrizeModel model = new PrizeModel();
+                PrizeModel model = new PrizeModel(
+                    placeNameValue.Text,
+                    placeNumberValue.Text,
+                    prizeAmountValue.Text,
+                    prizePercentageValue.Text);
 
-                model.PlaceName = placeNameValue.Text;
-                model.PlaceNumber = placeNumberValue.Text;
-                
-                
-                
-               // Console.WriteLine("Prize created");
+                foreach (IDataConnection db in GlobalConfig.Connections)
+                {
+                    db.CreatePrize(model);
+                    MessageBox.Show($"Prize created for: {db}");
+                }
 
+                placeNameValue.Text = "";
+                placeNumberValue.Text = "";
+                prizeAmountValue.Text = "0";
+                prizePercentageValue.Text = "0";
             }
-
+            else
+            {
+                MessageBox.Show("Invalid information. Please check again");
+            }
         }
 
         private bool ValidateForm()
         {
             bool output = true;
             int placeNumber = 0;
-            bool placeNumberValidNumber = int.TryParse(placeNameValue.Text, out placeNumber);
+            bool placeNumberValidNumber = int.TryParse(placeNumberValue.Text, out placeNumber);
 
-            if (!placeNumberValidNumber)
+            if (placeNumberValidNumber == false)
             {
                 output = false;
-                Console.WriteLine("Your place number is not valid.");
+                MessageBox.Show("Your place number is not valid.");
             }
 
             if (placeNumber < 1)
             {
                 output = false;
-                Console.WriteLine("Your place number is not valid.");
+                MessageBox.Show("Your place number is lower than 1.");
 
             }
 
             if (placeNameValue.Text.Length == 0)
             {
                 output = false;
-                Console.WriteLine("Your place name is not valid.");
+                MessageBox.Show("Your place name is not valid.");
             }
 
             decimal prizeAmount = 0;
-            int pricePercentage = 0;
+            double prizePercentage = 0;
 
             bool prizeAmountValidNumber = decimal.TryParse(prizeAmountValue.Text, out prizeAmount);
-            bool prizePercentageValidNumber = int.TryParse(pricePercentageValue.Text, out pricePercentage);
+            bool prizePercentageValidNumber = double.TryParse(prizePercentageValue.Text, out prizePercentage);
 
-            if ( !prizeAmountValidNumber || !prizePercentageValidNumber)
+            if (!prizeAmountValidNumber || !prizePercentageValidNumber)
             {
                 output = false;
-                Console.WriteLine("Not valid input.");
+                MessageBox.Show("Your percentage or prize amount is not valid.");
             }
 
-            if (prizeAmount <= 0 && pricePercentage <= 0)
+            if (prizeAmount <= 0 && prizePercentage <= 0)
             {
                 output = false;
-                Console.WriteLine("Not valid input.");
+                MessageBox.Show("Either prize or percentage is small.");
             }
 
-            if (pricePercentage < 0 || pricePercentage > 100)
+            if (prizePercentage < 0 || prizePercentage > 100)
             {
                 output = false;
-                Console.WriteLine("Not valid input.");
+                MessageBox.Show("Your percentage is out of range.");
             }
 
             return output;
@@ -113,6 +123,11 @@ namespace TrackerUI
         }
 
         private void placeNameValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreatePrizeForm_Load(object sender, EventArgs e)
         {
 
         }

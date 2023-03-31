@@ -14,13 +14,14 @@ namespace TrackerLibrary
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns>The prize information, with the unique identifier.</returns>
+
+        public string Information { get; private set; } = "SQL";
         public PrizeModel CreatePrize(PrizeModel model)
         {
             model.Id = 1;
-
+            
             return model;
         }
-
 
     }
 }
