@@ -19,7 +19,6 @@ namespace TrackerLibrary
                 SqlConnector sql = new SqlConnector();
                 Connections.Add(sql);
                 //string information = "SQL";
-
             }
 
             if (textfiles == true)

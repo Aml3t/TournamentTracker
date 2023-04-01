@@ -1,4 +1,4 @@
-﻿namespace TrackerLibrary
+﻿namespace TrackerLibrary.Models
 {
     public class PrizeModel
     {
@@ -15,7 +15,7 @@
         /// The name of the winner
         /// </summary>
         public string PlaceName { get; set; }
-        
+
         /// <summary>
         /// The price amount of the winner.
         /// </summary>
@@ -28,7 +28,7 @@
 
         public PrizeModel()
         {
-            
+
         }
 
         public PrizeModel(string placeName, string placeNumber,
@@ -47,7 +47,7 @@
             double pricePercentageValue = 0;
             double.TryParse(prizePercentage, out pricePercentageValue);
             PrizePercentage = pricePercentageValue;
-            
+
         }
     }
 }
