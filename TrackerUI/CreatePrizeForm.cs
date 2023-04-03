@@ -39,11 +39,11 @@ namespace TrackerUI
                     prizeAmountValue.Text,
                     prizePercentageValue.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.CreatePrize(model);
-                    MessageBox.Show($"Prize created for: {db}");
-                }
+                //foreach (IDataConnection db in GlobalConfig.Connections)
+                //{
+                //    db.CreatePrize(model);
+                //    MessageBox.Show($"Prize created for: {db}");
+                //}
 
                 placeNameValue.Text = "";
                 placeNumberValue.Text = "";

@@ -4,30 +4,54 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace TrackerLibrary
 {
     public static class GlobalConfig
     {
-        public static List<IDataConnection> Connections { get; private set; }
-                                            = new List<IDataConnection>();
-        public static void InitializeConnections(bool database, bool textfiles)
+        public static IDataConnection Connections { get; private set; }
+       
+        public static void InitializeConnections(DatabaseType db)
         {
-            if (database == true)
+                //switch (db)
+                //{
+                //    case DatabaseType.Sql:
+                    
+                //        SqlConnector sql = new SqlConnector();
+                //        Connections = sql;
+                //        break;
+
+                //    case DatabaseType.TextFile:
+
+                //        TextConnector text = new TextConnector();
+                //        Connections = text;
+                //        break;
+
+                //    default:
+                //        break;
+                //}
+
+            if (db == DatabaseType.Sql)
             {
                 // TODO - Create the SQL Connection
+
                 SqlConnector sql = new SqlConnector();
-                Connections.Add(sql);
-                //string information = "SQL";
+                Connections = sql;
+
             }
 
-            if (textfiles == true)
+            else if (db == DatabaseType.TextFile)
             {
                 // TODO - Generate the txt file
                 TextConnector text = new TextConnector();
-                Connections.Add(text);
+                Connections  = text;
             }
         }
 
+        public static string CnnString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
     }
 }
