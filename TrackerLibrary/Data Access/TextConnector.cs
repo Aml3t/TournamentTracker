@@ -19,7 +19,12 @@ namespace TrackerLibrary
         public string Information { get; private set; } = "Text File";
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            model.Id = 1;
+            // Load the text file
+            // Convert the text to List<PrizeModel>
+            // Find the max ID
+            // Add the new record with the new ID (max +1)
+            // Convert the prizes to List<string>
+            // Save the List<string> to the text file
 
             return model;
         }
