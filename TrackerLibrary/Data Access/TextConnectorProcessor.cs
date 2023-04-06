@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Web;
 using TrackerLibrary.Models;
 
-namespace TrackerLibrary.Data_Access.TextConnector
+// Save the List<string> to the text file
+
+namespace TrackerLibrary.Data_Access.TextHelpers
 {
     public static class TextConnectorProcessor
     {
@@ -23,10 +25,8 @@ namespace TrackerLibrary.Data_Access.TextConnector
             {
                 return new List<string>();
             }
-
             return File.ReadAllLines(file).ToList();
         }
-
         public static List<PrizeModel> ConvertToPrizeModels(this List<string> lines)
         {
             List<PrizeModel> output = new List<PrizeModel>();
@@ -40,9 +40,20 @@ namespace TrackerLibrary.Data_Access.TextConnector
                 prize.PlaceName = columns[2];
                 prize.PrizeAmount = decimal.Parse(columns[3]);
                 prize.PrizePercentage = double.Parse(columns[4]);
-                
+                output.Add(prize);
             }
             return output;
+        }
+        public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (PrizeModel p in models)
+            {
+                lines.Add($"{p.Id },{p.PlaceNumber },{p.PlaceName },{p.PrizeAmount },{p.PrizePercentage }");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
         }
     }
 }
