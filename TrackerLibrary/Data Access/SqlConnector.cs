@@ -19,7 +19,7 @@ namespace TrackerLibrary
                 p.Add("FirstName", model.FirstName);
                 p.Add("LastName", model.LastName);
                 p.Add("EmailAddress", model.EmailAddress);
-                p.Add("PhoneNumber", model.CellphoneNumber);
+                p.Add("CellphoneNumber", model.CellphoneNumber);
 
                 connection.Execute("spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 

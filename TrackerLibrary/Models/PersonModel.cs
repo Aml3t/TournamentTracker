@@ -11,10 +11,11 @@ namespace TrackerLibrary.Models
     /// </summary>
     public class PersonModel
     {
-        public PersonModel()
-        {
-                
-        }
+        /// <summary>
+        /// The unique id of the person.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// First name of the player
         /// </summary>
