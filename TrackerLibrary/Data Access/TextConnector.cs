@@ -14,6 +14,12 @@ namespace TrackerLibrary
 
         private const string PrizeFile = "PrizeModels.csv"; //Pascal notation cause const variable
         public string Information { get; private set; } = "Text File";
+
+        public PersonModel CreatePerson(PersonModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public PrizeModel CreatePrize(PrizeModel model)
         {
             // Load the text file und convert the text to List<PrizeModel>

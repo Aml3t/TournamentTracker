@@ -36,15 +36,15 @@
             selectTeamMemberDropDown = new ComboBox();
             selectTeamMemberLabel = new Label();
             addNewMemberBox = new GroupBox();
-            firstNameValue = new TextBox();
-            firstNameLabel = new Label();
-            lastNameValue = new TextBox();
-            lastNameLabel = new Label();
-            emailValue = new TextBox();
-            emailLabel = new Label();
+            createMemberValue = new Button();
             cellphoneValue = new TextBox();
             cellphoneLabel = new Label();
-            createMemberValue = new Button();
+            emailValue = new TextBox();
+            emailLabel = new Label();
+            lastNameValue = new TextBox();
+            lastNameLabel = new Label();
+            firstNameValue = new TextBox();
+            firstNameLabel = new Label();
             teamMembersListBox = new ListBox();
             deleteSelectedMemberButton = new Button();
             createTeamButton = new Button();
@@ -144,47 +144,43 @@
             addNewMemberBox.TabStop = false;
             addNewMemberBox.Text = "Add New Member";
             // 
-            // firstNameValue
+            // createMemberValue
             // 
-            firstNameValue.Location = new Point(170, 51);
-            firstNameValue.Name = "firstNameValue";
-            firstNameValue.Size = new Size(162, 43);
-            firstNameValue.TabIndex = 10;
-            firstNameValue.Tag = "";
+            createMemberValue.FlatAppearance.BorderColor = Color.Silver;
+            createMemberValue.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
+            createMemberValue.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
+            createMemberValue.FlatStyle = FlatStyle.Flat;
+            createMemberValue.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            createMemberValue.ForeColor = SystemColors.MenuHighlight;
+            createMemberValue.Location = new Point(111, 269);
+            createMemberValue.Name = "createMemberValue";
+            createMemberValue.Size = new Size(173, 39);
+            createMemberValue.TabIndex = 21;
+            createMemberValue.Text = "Create Member";
+            createMemberValue.UseVisualStyleBackColor = true;
+            createMemberValue.Click += createMemberValue_Click;
+            createMemberValue.MouseClick += createMemberValue_MouseClick;
             // 
-            // firstNameLabel
+            // cellphoneValue
             // 
-            firstNameLabel.AutoSize = true;
-            firstNameLabel.BackColor = Color.White;
-            firstNameLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            firstNameLabel.ForeColor = SystemColors.MenuHighlight;
-            firstNameLabel.Location = new Point(22, 51);
-            firstNameLabel.Name = "firstNameLabel";
-            firstNameLabel.Size = new Size(144, 37);
-            firstNameLabel.TabIndex = 9;
-            firstNameLabel.Tag = "";
-            firstNameLabel.Text = "First Name";
+            cellphoneValue.Location = new Point(170, 217);
+            cellphoneValue.Name = "cellphoneValue";
+            cellphoneValue.Size = new Size(162, 43);
+            cellphoneValue.TabIndex = 16;
+            cellphoneValue.Tag = "";
             // 
-            // lastNameValue
+            // cellphoneLabel
             // 
-            lastNameValue.Location = new Point(170, 106);
-            lastNameValue.Name = "lastNameValue";
-            lastNameValue.Size = new Size(162, 43);
-            lastNameValue.TabIndex = 12;
-            lastNameValue.Tag = "";
-            // 
-            // lastNameLabel
-            // 
-            lastNameLabel.AutoSize = true;
-            lastNameLabel.BackColor = Color.White;
-            lastNameLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lastNameLabel.ForeColor = SystemColors.MenuHighlight;
-            lastNameLabel.Location = new Point(22, 106);
-            lastNameLabel.Name = "lastNameLabel";
-            lastNameLabel.Size = new Size(142, 37);
-            lastNameLabel.TabIndex = 9;
-            lastNameLabel.Tag = "";
-            lastNameLabel.Text = "Last Name";
+            cellphoneLabel.AutoSize = true;
+            cellphoneLabel.BackColor = Color.White;
+            cellphoneLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cellphoneLabel.ForeColor = SystemColors.MenuHighlight;
+            cellphoneLabel.Location = new Point(22, 217);
+            cellphoneLabel.Name = "cellphoneLabel";
+            cellphoneLabel.Size = new Size(138, 37);
+            cellphoneLabel.TabIndex = 15;
+            cellphoneLabel.Tag = "";
+            cellphoneLabel.Text = "Cellphone";
             // 
             // emailValue
             // 
@@ -208,41 +204,47 @@
             emailLabel.Text = "Email";
             emailLabel.Click += label1_Click;
             // 
-            // cellphoneValue
+            // lastNameValue
             // 
-            cellphoneValue.Location = new Point(170, 217);
-            cellphoneValue.Name = "cellphoneValue";
-            cellphoneValue.Size = new Size(162, 43);
-            cellphoneValue.TabIndex = 16;
-            cellphoneValue.Tag = "";
+            lastNameValue.Location = new Point(170, 106);
+            lastNameValue.Name = "lastNameValue";
+            lastNameValue.Size = new Size(162, 43);
+            lastNameValue.TabIndex = 12;
+            lastNameValue.Tag = "";
             // 
-            // cellphoneLabel
+            // lastNameLabel
             // 
-            cellphoneLabel.AutoSize = true;
-            cellphoneLabel.BackColor = Color.White;
-            cellphoneLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cellphoneLabel.ForeColor = SystemColors.MenuHighlight;
-            cellphoneLabel.Location = new Point(22, 217);
-            cellphoneLabel.Name = "cellphoneLabel";
-            cellphoneLabel.Size = new Size(138, 37);
-            cellphoneLabel.TabIndex = 15;
-            cellphoneLabel.Tag = "";
-            cellphoneLabel.Text = "Cellphone";
+            lastNameLabel.AutoSize = true;
+            lastNameLabel.BackColor = Color.White;
+            lastNameLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lastNameLabel.ForeColor = SystemColors.MenuHighlight;
+            lastNameLabel.Location = new Point(22, 106);
+            lastNameLabel.Name = "lastNameLabel";
+            lastNameLabel.Size = new Size(142, 37);
+            lastNameLabel.TabIndex = 9;
+            lastNameLabel.Tag = "";
+            lastNameLabel.Text = "Last Name";
             // 
-            // createMemberValue
+            // firstNameValue
             // 
-            createMemberValue.FlatAppearance.BorderColor = Color.Silver;
-            createMemberValue.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
-            createMemberValue.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
-            createMemberValue.FlatStyle = FlatStyle.Flat;
-            createMemberValue.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            createMemberValue.ForeColor = SystemColors.MenuHighlight;
-            createMemberValue.Location = new Point(111, 269);
-            createMemberValue.Name = "createMemberValue";
-            createMemberValue.Size = new Size(173, 39);
-            createMemberValue.TabIndex = 21;
-            createMemberValue.Text = "Create Member";
-            createMemberValue.UseVisualStyleBackColor = true;
+            firstNameValue.Location = new Point(170, 51);
+            firstNameValue.Name = "firstNameValue";
+            firstNameValue.Size = new Size(162, 43);
+            firstNameValue.TabIndex = 10;
+            firstNameValue.Tag = "";
+            // 
+            // firstNameLabel
+            // 
+            firstNameLabel.AutoSize = true;
+            firstNameLabel.BackColor = Color.White;
+            firstNameLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            firstNameLabel.ForeColor = SystemColors.MenuHighlight;
+            firstNameLabel.Location = new Point(22, 51);
+            firstNameLabel.Name = "firstNameLabel";
+            firstNameLabel.Size = new Size(144, 37);
+            firstNameLabel.TabIndex = 9;
+            firstNameLabel.Tag = "";
+            firstNameLabel.Text = "First Name";
             // 
             // teamMembersListBox
             // 
@@ -291,7 +293,7 @@
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1007, 847);
+            ClientSize = new Size(962, 743);
             Controls.Add(createTeamButton);
             Controls.Add(deleteSelectedMemberButton);
             Controls.Add(teamMembersListBox);
