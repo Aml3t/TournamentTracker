@@ -11,9 +11,10 @@ namespace TrackerLibrary
 {
     public class SqlConnector : IDataConnection
     {
+        IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments"));
         public PersonModel CreatePerson(PersonModel model)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            using (connection)
             {
                 var p = new DynamicParameters();
                 p.Add("FirstName", model.FirstName);
@@ -26,17 +27,16 @@ namespace TrackerLibrary
                 return model;
             }
         }
-
         /// <summary>
         /// Saves a new prize to the database.
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns>The prize information, with the unique identifier.</returns>
 
-        //public string Information { get; private set; } = "SQL";
+        //public string Information { get; private set; } = "SQL"; My addon for user notification.
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            using (connection)
             {
                 var p = new DynamicParameters();
                 p.Add("@PlaceNumber", model.PlaceNumber);
@@ -51,6 +51,15 @@ namespace TrackerLibrary
                 return model;
             }
         }
+        public List<PersonModel> GetPerson_All()
+        {
+            List<PersonModel> output;
 
+            using (connection)
+            {
+                output = connection.Query<PersonModel>("dbo.spPeople_GetAll").ToList();
+            }
+            return output;
+        }
     }
 }

@@ -20,23 +20,23 @@ namespace TrackerLibrary
         public PersonModel CreatePerson(PersonModel model)
         {
             // Load the text file und convert the text to List<PersonModel>
-            List<PersonModel> person = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+            List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
             // Find the max ID
             int currentId = 1;
 
-            if (person.Count > 0)
+            if (people.Count > 0)
             {
-                currentId = person.OrderByDescending(x => x.Id).First().Id + 1;
+                currentId = people.OrderByDescending(x => x.Id).First().Id + 1;
             }
 
             model.Id = currentId;
 
             // Add the new record with the new ID (max +1)
-            person.Add(model);
+            people.Add(model);
 
             // Convert the person(List<PersonModel>) to List<string>
-            person.SaveToPersonFile(PeopleFile);
+            people.SaveToPeopleFile(PeopleFile);
 
 
             return model;
@@ -64,6 +64,11 @@ namespace TrackerLibrary
             prizes.SaveToPrizeFile(PrizeFile);
 
             return model;
+        }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -95,17 +95,18 @@
             addMemberButton.FlatStyle = FlatStyle.Flat;
             addMemberButton.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             addMemberButton.ForeColor = SystemColors.MenuHighlight;
-            addMemberButton.Location = new Point(104, 306);
+            addMemberButton.Location = new Point(122, 282);
             addMemberButton.Name = "addMemberButton";
-            addMemberButton.Size = new Size(198, 65);
+            addMemberButton.Size = new Size(173, 54);
             addMemberButton.TabIndex = 19;
             addMemberButton.Text = "Add Member";
             addMemberButton.UseVisualStyleBackColor = true;
+            addMemberButton.Click += addMemberButton_Click;
             // 
             // selectTeamMemberDropDown
             // 
             selectTeamMemberDropDown.FormattingEnabled = true;
-            selectTeamMemberDropDown.Location = new Point(67, 262);
+            selectTeamMemberDropDown.Location = new Point(67, 240);
             selectTeamMemberDropDown.Name = "selectTeamMemberDropDown";
             selectTeamMemberDropDown.Size = new Size(283, 38);
             selectTeamMemberDropDown.TabIndex = 18;
@@ -117,7 +118,7 @@
             selectTeamMemberLabel.BackColor = Color.White;
             selectTeamMemberLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             selectTeamMemberLabel.ForeColor = SystemColors.MenuHighlight;
-            selectTeamMemberLabel.Location = new Point(67, 209);
+            selectTeamMemberLabel.Location = new Point(67, 198);
             selectTeamMemberLabel.Name = "selectTeamMemberLabel";
             selectTeamMemberLabel.Size = new Size(263, 37);
             selectTeamMemberLabel.TabIndex = 17;
