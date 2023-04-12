@@ -70,16 +70,16 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             foreach (string line in lines)
             {
                 string[] columns = line.Split(',');
-                TeamModel team = new TeamModel();
-                team.Id = int.Parse((columns[0]));
-                team.TeamName = columns[1];
+                TeamModel t = new TeamModel();
+                t.Id = int.Parse((columns[0]));
+                t.TeamName = columns[1];
 
                 string[] personIds = columns[2].Split('|');
                 foreach (string id in personIds)
                 {
-                    team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
+                    t.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
                 }
-                output.Add(team);
+                output.Add(t);
             }
             return output;
         }
