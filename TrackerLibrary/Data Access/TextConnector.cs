@@ -14,6 +14,8 @@ namespace TrackerLibrary
 
         private const string PrizeFile = "PrizeModels.csv"; //Pascal notation cause const variable
         private const string PeopleFile = "PersonModels.csv";
+        private const string TeamFile = "TeamModels.csv";
+
 
         public string Information { get; private set; } = "Text File";
 
@@ -66,9 +68,31 @@ namespace TrackerLibrary
             return model;
         }
 
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            // Load the text file und convert the text to List<TeamModel>
+            List<TeamModel> team = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+            
+            // Find the max ID
+            int currentId = 1;
+            if (team.Count > 0)
+            {
+                currentId = team.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            // Add the new record with the new ID (max +1)
+            team.Add(model);
+
+
+
+            return model;
+        }
+
         public List<PersonModel> GetPerson_All()
         {
-            throw new NotImplementedException();
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
     }
 }
