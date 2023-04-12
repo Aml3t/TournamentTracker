@@ -64,8 +64,8 @@ namespace TrackerLibrary.Data_Access.TextHelpers
 
         public static List<TeamModel> ConvertToTeamModels(this List<string> lines, string peopleFile)
         {
-            List<TeamModel> output = new List<TeamModel>();
             List<PersonModel> people = peopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+            List<TeamModel> output = new List<TeamModel>();
 
             foreach (string line in lines)
             {
@@ -75,7 +75,11 @@ namespace TrackerLibrary.Data_Access.TextHelpers
                 team.TeamName = columns[1];
 
                 string[] personIds = columns[2].Split('|');
-
+                foreach (string id in personIds)
+                {
+                    team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
+                }
+                output.Add(team);
             }
             return output;
         }
@@ -101,5 +105,34 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
+
+        public static void SaveToTeamFile(this List<TeamModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (TeamModel t in models)
+            {
+                lines.Add($"{t.Id },{t.TeamName }, {ConvertPeopleListToString(t.TeamMembers)}");
+            }
+            File.WriteAllLines(fileName.FullFilePath(), lines);
+
+        }
+
+        public static string ConvertPeopleListToString(List<PersonModel> people)
+        {
+            if (people.Count == 0)
+            {
+                return "";
+            }
+            string output = "";
+            foreach (PersonModel p in people)
+            {
+                output += $"{p.Id}|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+            return output;
+        }
+
     }
 }

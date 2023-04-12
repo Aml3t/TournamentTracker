@@ -71,21 +71,23 @@ namespace TrackerLibrary
         public TeamModel CreateTeam(TeamModel model)
         {
             // Load the text file und convert the text to List<TeamModel>
-            List<TeamModel> team = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
             
             // Find the max ID
             int currentId = 1;
-            if (team.Count > 0)
+
+            if (teams.Count > 0)
             {
-                currentId = team.OrderByDescending(x => x.Id).First().Id + 1;
+                currentId = teams.OrderByDescending(x => x.Id).First().Id + 1;
             }
 
             model.Id = currentId;
 
             // Add the new record with the new ID (max +1)
-            team.Add(model);
+            teams.Add(model);
 
-
+            // Convert the persons(List<PersonModel>) to List<string>
+            teams.SaveToTeamFile(TeamFile);
 
             return model;
         }
