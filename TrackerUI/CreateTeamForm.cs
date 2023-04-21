@@ -37,7 +37,7 @@ namespace TrackerUI
         }
         private void WireUpLists()
         {
-            selectTeamMemberDropDown.DataSource = new List<string>();
+            selectTeamMemberDropDown.DataSource = new List<string>(); // It could me ... = null;
 
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
@@ -77,8 +77,6 @@ namespace TrackerUI
             team.TeamMembers = selectedTeamMembers;
 
             team = GlobalConfig.Connection.CreateTeam(team);
-
-            //TODO
 
         }
         private void createMemberValue_Click(object sender, EventArgs e)

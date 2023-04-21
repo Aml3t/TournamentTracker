@@ -10,12 +10,9 @@ namespace TrackerLibrary
 {
     public class TextConnector : IDataConnection
     {
-        // TODO - Make the CreatePrize method to actually save text files.
-
         private const string PrizeFile = "PrizeModels.csv"; //Pascal notation cause const variable
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamFile = "TeamModels.csv";
-
 
         public string Information { get; private set; } = "Text File";
 
@@ -67,7 +64,6 @@ namespace TrackerLibrary
 
             return model;
         }
-
         public TeamModel CreateTeam(TeamModel model)
         {
             // Load the text file und convert the text to List<TeamModel>
@@ -91,10 +87,14 @@ namespace TrackerLibrary
 
             return model;
         }
-
         public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
         }
     }
 }

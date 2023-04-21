@@ -18,7 +18,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
         {
             return $"{ConfigurationManager.AppSettings["filePath"] }\\{fileName}";
         }
-
         public static List<string> LoadFile(this string file)
         {
             if (!File.Exists(file))
@@ -61,7 +60,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             return output;
         }
-
         public static List<TeamModel> ConvertToTeamModels(this List<string> lines, string peopleFile)
         {
             List<PersonModel> people = peopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
@@ -83,7 +81,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             return output;
         }
-
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -94,7 +91,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
-
         public static void SaveToPeopleFile(this List<PersonModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -117,7 +113,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             File.WriteAllLines(fileName.FullFilePath(), lines);
 
         }
-
         public static string ConvertPeopleListToString(List<PersonModel> people)
         {
             if (people.Count == 0)
@@ -133,6 +128,5 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             output = output.Substring(0, output.Length - 1);
             return output;
         }
-
     }
 }

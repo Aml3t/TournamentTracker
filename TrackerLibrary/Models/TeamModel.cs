@@ -13,6 +13,5 @@ namespace TrackerLibrary.Models
 
         public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
 
-
     }
 }

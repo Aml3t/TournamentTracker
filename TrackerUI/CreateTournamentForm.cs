@@ -7,18 +7,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTournament : Form
+    public partial class CreateTournamentForm : Form
     {
-        public CreateTournament()
+        List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
+        List<TeamModel> selectedTeams = new List<TeamModel>();
+        List<PrizeModel> selectedPrizes = new List<PrizeModel>();
+
+        public CreateTournamentForm()
         {
             InitializeComponent();
-        }
+            WireUpLists();
 
+        }
+        private void WireUpLists()
+        {
+            selectTeamDropDown.DataSource = null;
+            selectTeamDropDown.DataSource = availableTeams;
+            selectTeamDropDown.DisplayMember = "TeamName";
+
+            tournamentTeamsListBox.DataSource = null;
+            tournamentTeamsListBox.DataSource = selectedTeams;
+            tournamentTeamsListBox.DisplayMember = "TeamName";
+
+            prizesListBox.DataSource = null;
+            prizesListBox.DataSource = selectedPrizes;
+            prizesListBox.DisplayMember = "PlaceName";
+        }
         private void CreateTournamentForm_Load(object sender, EventArgs e)
         {
+            selectTeamDropDown.DataSource = availableTeams;
+            selectTeamDropDown.DisplayMember = "TeamName";
 
         }
 
@@ -34,10 +57,33 @@ namespace TrackerUI
 
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            TeamModel t = (TeamModel)selectTeamDropDown.SelectedItem;
 
+            if (t != null)
+            {
+                availableTeams.Remove(t);
+                selectedTeams.Add(t);
+
+                WireUpLists();
+            }
         }
 
         private void deleteSelectedPrizeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectTeamDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tournamentPlayersListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
         {
 
         }
