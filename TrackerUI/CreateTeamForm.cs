@@ -15,16 +15,18 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTeamForm : Form
+    public partial class CreateTeamForm : Form, ITeamRequester
     {
         private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
 
-        public CreateTeamForm()
+        private ITeamRequester calling;
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
             //CreateSampleData();
             WireUpLists();
+            calling = caller;
         }
 
         private void CreateSampleData()
@@ -76,8 +78,10 @@ namespace TrackerUI
             team.TeamName = teamNameValue.Text;
             team.TeamMembers = selectedTeamMembers;
 
-            team = GlobalConfig.Connection.CreateTeam(team);
+            GlobalConfig.Connection.CreateTeam(team);
 
+            calling.TeamComplete(team);
+            this.Close();
         }
         private void createMemberValue_Click(object sender, EventArgs e)
         {
@@ -165,6 +169,16 @@ namespace TrackerUI
                 WireUpLists();
             }
             else MessageBox.Show("Select member");
+        }
+
+        public void TeamComplete(ITeamRequester model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TeamComplete(TeamModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }
