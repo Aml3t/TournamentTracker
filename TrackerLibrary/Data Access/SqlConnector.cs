@@ -67,7 +67,7 @@ namespace TrackerLibrary
                 {
                     p = new DynamicParameters();
                     p.Add("@TeamId", model.Id);
-                    p.Add("PersonId", tm.Id);
+                    p.Add("@PersonId", tm.Id);
 
                     connection.Execute("dbo.spTeamMembers_Insert",p, commandType: CommandType.StoredProcedure);
                 }

@@ -15,6 +15,8 @@ namespace TrackerUI
     public partial class CreateTournamentForm : Form, IPrizeRequester, ITeamRequester
     {
         List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
+        List<TeamModel> availablePrizes = GlobalConfig.Connection.GetTeam_All();
+
         List<TeamModel> selectedTeams = new List<TeamModel>();
         List<PrizeModel> selectedPrizes = new List<PrizeModel>();
 
@@ -67,8 +69,17 @@ namespace TrackerUI
                 WireUpLists();
             }
         }
-        private void deleteSelectedPrizeButton_Click(object sender, EventArgs e)
+        private void removeSelectedPrizeButton_Click(object sender, EventArgs e)
         {
+            //PrizeModel p = (PrizeModel)prizesListBox.SelectedItem;
+
+            //if (p != null)
+            //{
+            //    selectedPrizes.Add(p);
+            //    availablePrizes.Remove(p);
+            //}
+            //else MessageBox.Show("Select prize");
+
 
         }
 
@@ -100,6 +111,21 @@ namespace TrackerUI
             MessageBox.Show("Team created");
             selectedTeams.Add(model);
             WireUpLists();
+        }
+
+        private void removeSelectedPlayersButton_Click(object sender, EventArgs e)
+        {
+            TeamModel t = (TeamModel)tournamentTeamsListBox.SelectedItem;
+
+            if (t != null)
+            {
+                selectedTeams.Remove(t);
+                availableTeams.Add(t);
+
+                WireUpLists();
+            }
+            else MessageBox.Show("Select team");
+
         }
     }
 }
