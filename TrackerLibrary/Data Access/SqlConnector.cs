@@ -21,8 +21,11 @@ namespace TrackerLibrary
                 p.Add("LastName", model.LastName);
                 p.Add("EmailAddress", model.EmailAddress);
                 p.Add("CellphoneNumber", model.CellphoneNumber);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 connection.Execute("spPeople_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
 
                 return model;
             }
@@ -61,6 +64,7 @@ namespace TrackerLibrary
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 connection.Execute("dbo.spTeams_Insert", p, commandType: CommandType.StoredProcedure);
+                
                 model.Id = p.Get<int>("@id");
 
                 foreach (PersonModel tm in model.TeamMembers)
@@ -69,7 +73,9 @@ namespace TrackerLibrary
                     p.Add("@TeamId", model.Id);
                     p.Add("@PersonId", tm.Id);
 
-                    connection.Execute("dbo.spTeamMembers_Insert",p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spTeamMembers_Insert", p, commandType: CommandType.StoredProcedure);
+                    //model.Id = p.Get<int>("@id");
+
                 }
                 return model;
             }

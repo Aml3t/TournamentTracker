@@ -39,7 +39,7 @@ namespace TrackerUI
         }
         private void WireUpLists()
         {
-            selectTeamMemberDropDown.DataSource = new List<string>(); // It could me ... = null;
+            selectTeamMemberDropDown.DataSource = null; // It could me ... new List<string>();
 
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";

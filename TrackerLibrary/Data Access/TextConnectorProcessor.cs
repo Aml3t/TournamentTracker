@@ -62,12 +62,13 @@ namespace TrackerLibrary.Data_Access.TextHelpers
         }
         public static List<TeamModel> ConvertToTeamModels(this List<string> lines, string peopleFile)
         {
-            List<PersonModel> people = peopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
             List<TeamModel> output = new List<TeamModel>();
+            List<PersonModel> people = peopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
             foreach (string line in lines)
             {
                 string[] columns = line.Split(',');
+
                 TeamModel t = new TeamModel();
                 t.Id = int.Parse((columns[0]));
                 t.TeamName = columns[1];
