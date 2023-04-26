@@ -90,6 +90,7 @@
             entryFeeValue.TabIndex = 12;
             entryFeeValue.Tag = "";
             entryFeeValue.Text = "0";
+            entryFeeValue.TextChanged += entryFeeValue_TextChanged;
             // 
             // entryFeeLabel
             // 
@@ -265,6 +266,7 @@
             createTournamentButton.TabIndex = 24;
             createTournamentButton.Text = "Create Tournament";
             createTournamentButton.UseVisualStyleBackColor = true;
+            createTournamentButton.Click += createTournamentButton_Click;
             // 
             // CreateTournamentForm
             // 
