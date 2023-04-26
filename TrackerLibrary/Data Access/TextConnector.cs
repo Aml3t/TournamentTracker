@@ -13,6 +13,8 @@ namespace TrackerLibrary
         private const string PrizeFile = "PrizeModels.csv"; //Pascal notation cause const variable
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamFile = "TeamModels.csv";
+        private const string TournamentFile = "TournamentModels.csv";
+
 
         public string Information { get; private set; } = "Text File";
 
@@ -90,14 +92,13 @@ namespace TrackerLibrary
 
         public TournamentModel CreateTournament(TournamentModel model)
         {
-            throw new NotImplementedException();
+            List<TournamentModel> tournaments = TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TournamentFile);
+            return model;
         }
-
         public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
-
         public List<TeamModel> GetTeam_All()
         {
             return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);

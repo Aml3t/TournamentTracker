@@ -82,6 +82,18 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             return output;
         }
+
+        public static List<TournamentModel> ConvertToTournamentModels (this List<string> lines, string tournamentFile)
+        {
+
+            //id,TournamentName,EntryFee,(id|id|id = Entered Teams), (id|id|id = Prizes), (Rounds = id^id^id|id^id^id|id^id^id)
+            List<TeamModel> enteredTeams = new List<TeamModel>();
+            List<PrizeModel> prizes = new List<PrizeModel>();
+            List<List<MatchupModel>> rounds = new List<List<MatchupModel>>();
+            List<TournamentModel> output = new List<TournamentModel>();
+            return output;
+        }
+
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -102,7 +114,6 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
-
         public static void SaveToTeamFile(this List<TeamModel> models, string fileName)
         {
             List<string> lines = new List<string>();

@@ -128,12 +128,6 @@ namespace TrackerUI
         private void createTournamentButton_Click(object sender, EventArgs e)
         {
             // Validate data
-
-
-            // Create tournament model
-            TournamentModel tm = new TournamentModel();
-
-            tm.TournamentName = tournamentNameValue.Text;
             decimal fee = 0;
             bool feeAcceptable = decimal.TryParse(entryFeeValue.Text, out fee);
             
@@ -144,16 +138,25 @@ namespace TrackerUI
                 MessageBoxIcon.Error);
                 return;
             }
+
+            // Create tournament model
+            TournamentModel tm = new TournamentModel();
+
+            tm.TournamentName = tournamentNameValue.Text;
             tm.EntryFee = fee;
 
             tm.Prizes = selectedPrizes;
             tm.EnteredTeams = selectedTeams;
 
+            //  Create our matchups
+
+
             // Create a tournament entry
             // Create all of the prizes entries
             // Create all the team entries
+            GlobalConfig.Connection.CreateTournament(tm);
 
-            //  Create our matchups
+            
         }
 
         private void entryFeeValue_TextChanged(object sender, EventArgs e)
