@@ -10,7 +10,7 @@ namespace TrackerLibrary
 {
     public class TextConnector : IDataConnection
     {
-        private const string PrizeFile = "PrizeModels.csv"; //Pascal notation cause const variable
+        private const string PrizesFile = "PrizeModels.csv"; //Pascal notation cause const variable
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamFile = "TeamModels.csv";
         private const string TournamentFile = "TournamentModels.csv";
@@ -46,7 +46,7 @@ namespace TrackerLibrary
         public PrizeModel CreatePrize(PrizeModel model)
         {
             // Load the text file und convert the text to List<PrizeModel>
-            List<PrizeModel> prizes = PrizeFile.FullFilePath().LoadFile().ConvertToPrizeModels();
+            List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModels();
 
             // Find the max ID
             int currentId = 1;
@@ -62,7 +62,7 @@ namespace TrackerLibrary
             prizes.Add(model);
 
             // Convert the prizes(List<PrizeModel>) to List<string>
-            prizes.SaveToPrizeFile(PrizeFile);
+            prizes.SaveToPrizeFile(PrizesFile);
 
             return model;
         }
@@ -92,7 +92,24 @@ namespace TrackerLibrary
 
         public TournamentModel CreateTournament(TournamentModel model)
         {
-            List<TournamentModel> tournaments = TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TournamentFile);
+            List<TournamentModel> tournaments = TournamentFile
+                .FullFilePath()
+                .LoadFile()
+                .ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
+
+            int currentId = 1;
+
+            if (tournaments.Count > 0)
+            {
+                currentId = tournaments.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            tournaments.Add(model);
+
+            tournaments.SaveToTournamentFile(TournamentFile);
+
             return model;
         }
         public List<PersonModel> GetPerson_All()
