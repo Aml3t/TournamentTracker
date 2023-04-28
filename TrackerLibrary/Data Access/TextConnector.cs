@@ -90,7 +90,7 @@ namespace TrackerLibrary
             return model;
         }
 
-        public TournamentModel CreateTournament(TournamentModel model)
+        public void CreateTournament(TournamentModel model)
         {
             List<TournamentModel> tournaments = TournamentFile
                 .FullFilePath()
@@ -109,8 +109,6 @@ namespace TrackerLibrary
             tournaments.Add(model);
 
             tournaments.SaveToTournamentFile(TournamentFile);
-
-            return model;
         }
         public List<PersonModel> GetPerson_All()
         {

@@ -10,21 +10,28 @@ namespace TrackerLibrary.Models
     /// Represents one match in the tournament
     /// </summary>
     /// 
+
     public class MatchupModel
     {
-    /// <summary>
-    /// The list of the competiting teams in this match.
-    /// </summary>
-    public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
+        /// <summary>
+        /// The unique id of a match.
+        /// </summary>
+        public int Id { get; set; }
 
-    /// <summary>
-    /// The winner of the match.
-    /// </summary>
-    public TeamModel Winner { get; set; }
-        
-    /// <summary>
-    /// Which round this match is a part of.
-    /// </summary>
-    public int MatchupRound { get; set; }
+        /// <summary>
+        /// The list of the competiting teams in this match.
+        /// </summary>
+        public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
+
+        /// <summary>
+        /// The winner of the match.
+        /// </summary>
+        public TeamModel Winner { get; set; }
+
+        /// <summary>
+        /// Which round this match is a part of.
+        /// </summary>
+        public int MatchupRound { get; set; }
+
     }   
 }
