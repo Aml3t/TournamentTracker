@@ -158,7 +158,6 @@ namespace TrackerUI
 
             
         }
-
         private void entryFeeValue_TextChanged(object sender, EventArgs e)
         {
 
