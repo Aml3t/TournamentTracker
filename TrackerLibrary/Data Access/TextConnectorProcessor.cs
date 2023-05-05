@@ -172,13 +172,35 @@ namespace TrackerLibrary.Data_Access.TextHelpers
                     $"{ConvertPrizeListToString(tm.Prizes)}," +
                     $"{ConvertedRoundListToString(tm.Rounds)}");
             }
-
             File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
+        public static void SaveRoundsToFile(this TournamentModel model ,string matchupFile, string matchupEntryFile)
+        {
+            // Loop through each Round
+            // Loop through each Matchup
+            // Get the id for the new matchup and save the record
+            // Loop through each entry, get the id and save it
+
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel matchup  in round)
+                {
+                    matchup.SaveToMatchupFile(matchupFile);
+                }
+            }
+        }
+
+        public static void SaveToMatchupFile(this MatchupModel matchup, string matchupFile)
+        {
+            foreach (MatchupEntryModel entry in matchup.Entries)
+            {
+                entry.SaveEntryToFile(matchupEntryFile);
+            }
+            
         }
         private static string ConvertedRoundListToString(List<List<MatchupModel>> rounds)
         {
             // Rounds = id^id^id|id^id^id|id^id^id
-
             string output = "";
 
             if (rounds.Count == 0)
