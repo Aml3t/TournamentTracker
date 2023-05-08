@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO.Enumeration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -74,10 +75,10 @@ namespace TrackerLibrary.Data_Access.TextHelpers
                 t.TeamName = columns[1];
 
                 string[] personIds = columns[2].Split('|');
-                foreach (string id in personIds)
-                {
-                    t.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
-                }
+                    foreach (string id in personIds)
+                    {
+                        t.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
+                    }
                 output.Add(t);
             }
             return output;
@@ -185,18 +186,77 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             {
                 foreach (MatchupModel matchup  in round)
                 {
-                    matchup.SaveToMatchupFile(matchupFile);
+                    matchup.SaveToMatchupFile(matchupFile, matchupEntryFile);
                 }
             }
         }
+        public static List<MatchupEntryModel> ConvertToMatchupEntryModels(this List<string> lines)
+        {
+            // id = 0, TeamCompeting = 1, Score = 2, ParentMatchup = 3
+            List<MatchupEntryModel> output = new List<MatchupEntryModel>();
 
-        public static void SaveToMatchupFile(this MatchupModel matchup, string matchupFile)
+            foreach (string line in lines)
+            {
+                string[] colums = line.Split(',');
+                MatchupEntryModel me = new MatchupEntryModel();
+
+                me.Id = int.Parse(colums[0]);
+                me.TeamCompeting = LookupTeamById(int.Parse(colums[1]));
+                me.Score = double.Parse(colums[2]);
+                me.ParentMatchup = LookupTeamById(int.Parse(colums[3]));
+            }
+            throw new NotImplementedException();
+        }
+        public static List<MatchupEntryModel> ConvertStringToMatchupEntryModels(string input)
+        {
+            string[] ids = input.Split('|');
+            List<MatchupEntryModel> output = new List<MatchupEntryModel>();
+            List<MatchupEntryModel> entries = GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile().ConvertToMatchupEntryModels();
+
+            foreach (string id in ids)
+            {
+                output.Add(entries.Where(x => x.Id == int.Parse(id)).First());
+            }
+            return output;
+
+        }
+
+        private static TeamModel LookupTeamById(int id)
+        {
+            List<TeamModel> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(GlobalConfig.PeopleFile);
+
+            return teams.Where(x => x.Id == id).First();
+        }
+        public static List<MatchupModel> ConvertToMatchupModels(this List<string> lines)
+        {
+            List<MatchupModel> output = new List<MatchupModel>();
+
+            foreach (string line in lines)
+            {
+                string[] columns = line.Split(',');
+
+                MatchupModel p = new MatchupModel();
+                p.Id = int.Parse(columns[0]);
+                p.Entries = ConvertStringToMatchupEntryModels(columns[1]);
+                p.Winner = LookupTeamById(int.Parse(columns[2]));
+                p.MatchupRound = int.Parse(columns[3]);
+                output.Add(p);
+            }
+            return output;
+        }
+
+        public static void SaveToMatchupFile(this MatchupModel matchup, string matchupFile, string matchupEntryFile)
         {
             foreach (MatchupEntryModel entry in matchup.Entries)
             {
                 entry.SaveEntryToFile(matchupEntryFile);
             }
             
+        }
+
+        public static void SaveEntryToFile(this MatchupEntryModel entry, string matchupEntryFile)
+        {
+
         }
         private static string ConvertedRoundListToString(List<List<MatchupModel>> rounds)
         {
