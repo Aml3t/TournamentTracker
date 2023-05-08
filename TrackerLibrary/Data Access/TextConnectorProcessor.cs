@@ -186,7 +186,7 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             {
                 foreach (MatchupModel matchup  in round)
                 {
-                    matchup.SaveToMatchupFile(matchupFile, matchupEntryFile);
+                    matchup.SaveMatchupToFile(matchupFile, matchupEntryFile);
                 }
             }
         }
@@ -198,14 +198,24 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             foreach (string line in lines)
             {
                 string[] colums = line.Split(',');
+                
                 MatchupEntryModel me = new MatchupEntryModel();
-
                 me.Id = int.Parse(colums[0]);
                 me.TeamCompeting = LookupTeamById(int.Parse(colums[1]));
                 me.Score = double.Parse(colums[2]);
-                me.ParentMatchup = LookupTeamById(int.Parse(colums[3]));
+
+                int parentId = 0;
+                if (int.TryParse(colums[3], out parentId))
+                {
+                    me.ParentMatchup = LookupMatchupById(parentId);
+                }
+                else
+                {
+                    me.ParentMatchup = null;
+                }
+                output.Add(me);
             }
-            throw new NotImplementedException();
+            return output;
         }
         public static List<MatchupEntryModel> ConvertStringToMatchupEntryModels(string input)
         {
@@ -218,14 +228,18 @@ namespace TrackerLibrary.Data_Access.TextHelpers
                 output.Add(entries.Where(x => x.Id == int.Parse(id)).First());
             }
             return output;
-
         }
-
         private static TeamModel LookupTeamById(int id)
         {
             List<TeamModel> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(GlobalConfig.PeopleFile);
 
             return teams.Where(x => x.Id == id).First();
+        }
+        private static MatchupModel LookupMatchupById(int id)
+        {
+            List<MatchupModel> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile().ConvertToMatchupModels();
+
+            return matchups.Where(x => x.Id == id).First();
         }
         public static List<MatchupModel> ConvertToMatchupModels(this List<string> lines)
         {
@@ -244,16 +258,16 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
             return output;
         }
-
-        public static void SaveToMatchupFile(this MatchupModel matchup, string matchupFile, string matchupEntryFile)
+        public static void SaveMatchupToFile(this MatchupModel matchup, string matchupFile, string matchupEntryFile)
         {
+            List<MatchupModel> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile().ConvertToMatchupModels();
+            
             foreach (MatchupEntryModel entry in matchup.Entries)
             {
                 entry.SaveEntryToFile(matchupEntryFile);
             }
             
         }
-
         public static void SaveEntryToFile(this MatchupEntryModel entry, string matchupEntryFile)
         {
 
