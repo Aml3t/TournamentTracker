@@ -23,7 +23,7 @@ namespace TrackerUI
         {
             InitializeComponent();
             WireUpLists();
-            MessageBox.Show("Tournament created");
+            //MessageBox.Show("Tournament created");
         }
         private void WireUpLists()
         {
