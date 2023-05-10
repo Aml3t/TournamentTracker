@@ -244,19 +244,38 @@ namespace TrackerLibrary.Data_Access.TextHelpers
         {
             string[] ids = input.Split('|');
             List<MatchupEntryModel> output = new List<MatchupEntryModel>();
-            List<MatchupEntryModel> entries = GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile().ConvertToMatchupEntryModels();
+            List<string> entries = GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile();
+            List<string> matchingEntries = new List<string>();
 
             foreach (string id in ids)
             {
-                output.Add(entries.Where(x => x.Id == int.Parse(id)).First());
+                foreach (string entry in entries)
+                {
+                    string[] columns = entry.Split(',');
+                    if (columns[0] == id)
+                    {
+                        matchingEntries.Add(entry);
+                    }
+                }
             }
+            output = matchingEntries.ConvertToMatchupEntryModels();
+
             return output;
         }
         private static TeamModel LookupTeamById(int id)
         {
-            List<TeamModel> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(GlobalConfig.PeopleFile);
+            List<string> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile();
 
-            return teams.Where(x => x.Id == id).First();
+            foreach (string team in teams)
+            {
+                string[] columns = team.Split(',');
+                if (columns[0] == id.ToString())
+                {
+                    List<string> matchingTeams = new List<string>();
+
+                }
+            }
+
         }
         private static MatchupModel LookupMatchupById(int id)
         {
@@ -338,6 +357,7 @@ namespace TrackerLibrary.Data_Access.TextHelpers
 
             List<string> lines = new List<string>();
 
+            // id = 0, TeamCompeting = 1, Score = 2, ParentMatchup = 3
             foreach (MatchupEntryModel e in entries)
             {
                 string parent = "";
