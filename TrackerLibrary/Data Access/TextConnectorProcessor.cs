@@ -120,12 +120,18 @@ namespace TrackerLibrary.Data_Access.TextHelpers
                     tm.EnteredTeams.Add(teams.Where(x => x.Id == int.Parse(id)).First());
                 }
 
-                string[] prizeIds = columns[4].Split('|');
-
-                foreach (string id in prizeIds)
+                if (columns[4].Length > 0)
                 {
-                    tm.Prizes.Add(prizes.Where(x => x.Id == int.Parse(id)).First());
+                    string[] prizeIds = columns[4].Split('|');
+
+                    foreach (string id in prizeIds)
+                    {
+
+                        tm.Prizes.Add(prizes.Where(x => x.Id == int.Parse(id)).First());
+                    }
+
                 }
+
 
                 // Capture rounds information
                 string[] rounds = columns[5].Split('|');
@@ -269,19 +275,32 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             foreach (string team in teams)
             {
                 string[] columns = team.Split(',');
+
                 if (columns[0] == id.ToString())
                 {
                     List<string> matchingTeams = new List<string>();
-
+                    matchingTeams.Add(team);
+                    return matchingTeams.ConvertToTeamModels(GlobalConfig.PeopleFile).First();
                 }
             }
-
+            return null;
         }
         private static MatchupModel LookupMatchupById(int id)
         {
-            List<MatchupModel> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile().ConvertToMatchupModels();
+            List<string> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile();
 
-            return matchups.Where(x => x.Id == id).First();
+            foreach (string matchup in matchups)
+            {
+                string[] columns = matchup.Split(',');
+
+                if (columns[0] == id.ToString())
+                {
+                    List<string> matchingMatchups = new List<string>();
+                    matchingMatchups.Add(matchup);
+                    return matchingMatchups.ConvertToMatchupModels().First();
+                }
+            }
+            return null;
         }
         public static List<MatchupModel> ConvertToMatchupModels(this List<string> lines)
         {
