@@ -34,7 +34,7 @@
             roundLabel = new Label();
             comboBox1 = new ComboBox();
             unplayedOnlyCheckbox = new CheckBox();
-            ListBox = new ListBox();
+            matchupListBox = new ListBox();
             teamOneName = new Label();
             teamOneScoreLabel = new Label();
             TeamOneScoreValue = new TextBox();
@@ -69,6 +69,7 @@
             tournamentName.TabIndex = 1;
             tournamentName.Tag = "";
             tournamentName.Text = "<none>";
+            tournamentName.Click += tournamentName_Click;
             // 
             // roundLabel
             // 
@@ -98,7 +99,7 @@
             unplayedOnlyCheckbox.FlatStyle = FlatStyle.Flat;
             unplayedOnlyCheckbox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             unplayedOnlyCheckbox.ForeColor = SystemColors.MenuHighlight;
-            unplayedOnlyCheckbox.Location = new Point(159, 143);
+            unplayedOnlyCheckbox.Location = new Point(159, 171);
             unplayedOnlyCheckbox.Name = "unplayedOnlyCheckbox";
             unplayedOnlyCheckbox.Size = new Size(209, 41);
             unplayedOnlyCheckbox.TabIndex = 4;
@@ -107,16 +108,16 @@
             unplayedOnlyCheckbox.UseVisualStyleBackColor = true;
             unplayedOnlyCheckbox.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // ListBox
+            // matchupListBox
             // 
-            ListBox.BorderStyle = BorderStyle.FixedSingle;
-            ListBox.FormattingEnabled = true;
-            ListBox.ItemHeight = 30;
-            ListBox.Location = new Point(49, 190);
-            ListBox.Name = "ListBox";
-            ListBox.Size = new Size(300, 182);
-            ListBox.TabIndex = 5;
-            ListBox.Tag = "matchupListbox";
+            matchupListBox.BorderStyle = BorderStyle.FixedSingle;
+            matchupListBox.FormattingEnabled = true;
+            matchupListBox.ItemHeight = 30;
+            matchupListBox.Location = new Point(49, 228);
+            matchupListBox.Name = "matchupListBox";
+            matchupListBox.Size = new Size(300, 182);
+            matchupListBox.TabIndex = 5;
+            matchupListBox.Tag = "matchupListbox";
             // 
             // teamOneName
             // 
@@ -231,7 +232,7 @@
             Controls.Add(TeamOneScoreValue);
             Controls.Add(teamOneScoreLabel);
             Controls.Add(teamOneName);
-            Controls.Add(ListBox);
+            Controls.Add(matchupListBox);
             Controls.Add(unplayedOnlyCheckbox);
             Controls.Add(comboBox1);
             Controls.Add(roundLabel);
@@ -254,7 +255,7 @@
         private Label roundLabel;
         private ComboBox comboBox1;
         private CheckBox unplayedOnlyCheckbox;
-        private ListBox ListBox;
+        private ListBox matchupListBox;
         private Label teamOneName;
         private Label teamOneScoreLabel;
         private TextBox TeamOneScoreValue;
