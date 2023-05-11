@@ -282,9 +282,12 @@ namespace TrackerLibrary
                         if (m.MatchupRound > currRound)
                         {
                             t.Rounds.Add(currRow);
+                            currRow = new List<MatchupModel>();
+                            currRound += 1;
                         }
-
+                        currRow.Add(m);
                     }
+                    t.Rounds.Add(currRow);
                 }
 
             }
