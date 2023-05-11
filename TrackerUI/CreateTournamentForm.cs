@@ -155,7 +155,6 @@ namespace TrackerUI
             // Create all of the prizes entries
             // Create all the team entries
             GlobalConfig.Connection.CreateTournament(tm);
-
             
         }
         private void entryFeeValue_TextChanged(object sender, EventArgs e)
