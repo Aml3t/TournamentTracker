@@ -15,8 +15,14 @@ namespace TrackerLibrary.Models
         /// The unique id of a match entry.
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
-        /// Represents one team in the matchup
+        /// Unique identifier for the team.
+        /// </summary>
+        public int TeamCompetingId { get; set; }
+
+        /// <summary>
+        /// Represents one team in the matchup.
         /// </summary>
         public TeamModel TeamCompeting { get; set; }
 
@@ -26,7 +32,12 @@ namespace TrackerLibrary.Models
         public double Score { get; set; }
 
         /// <summary>
-        /// The matchup that this team came
+        /// Unique identifier for the parent matchup {team}.
+        /// </summary>
+        public int ParentMatchupId { get; set; }
+
+        /// <summary>
+        /// The matchup that this team came from as the winner.
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }
     }

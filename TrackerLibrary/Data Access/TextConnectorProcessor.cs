@@ -129,9 +129,7 @@ namespace TrackerLibrary.Data_Access.TextHelpers
 
                         tm.Prizes.Add(prizes.Where(x => x.Id == int.Parse(id)).First());
                     }
-
                 }
-
 
                 // Capture rounds information
                 string[] rounds = columns[5].Split('|');
