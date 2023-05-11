@@ -32,7 +32,7 @@
             headerLabel = new Label();
             tournamentName = new Label();
             roundLabel = new Label();
-            comboBox1 = new ComboBox();
+            roundDropDown = new ComboBox();
             unplayedOnlyCheckbox = new CheckBox();
             matchupListBox = new ListBox();
             teamOneName = new Label();
@@ -84,14 +84,15 @@
             roundLabel.Tag = "";
             roundLabel.Text = "Round";
             // 
-            // comboBox1
+            // roundDropDown
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(159, 99);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(220, 38);
-            comboBox1.TabIndex = 3;
-            comboBox1.Tag = "roundDropDown";
+            roundDropDown.FormattingEnabled = true;
+            roundDropDown.Location = new Point(159, 99);
+            roundDropDown.Name = "roundDropDown";
+            roundDropDown.Size = new Size(220, 38);
+            roundDropDown.TabIndex = 3;
+            roundDropDown.Tag = "roundDropDown";
+            roundDropDown.SelectedIndexChanged += roundDropDown_SelectedIndexChanged;
             // 
             // unplayedOnlyCheckbox
             // 
@@ -118,6 +119,7 @@
             matchupListBox.Size = new Size(300, 182);
             matchupListBox.TabIndex = 5;
             matchupListBox.Tag = "matchupListbox";
+            matchupListBox.SelectedIndexChanged += matchupListBox_SelectedIndexChanged;
             // 
             // teamOneName
             // 
@@ -234,7 +236,7 @@
             Controls.Add(teamOneName);
             Controls.Add(matchupListBox);
             Controls.Add(unplayedOnlyCheckbox);
-            Controls.Add(comboBox1);
+            Controls.Add(roundDropDown);
             Controls.Add(roundLabel);
             Controls.Add(tournamentName);
             Controls.Add(headerLabel);
@@ -253,7 +255,7 @@
         private Label headerLabel;
         private Label tournamentName;
         private Label roundLabel;
-        private ComboBox comboBox1;
+        private ComboBox roundDropDown;
         private CheckBox unplayedOnlyCheckbox;
         private ListBox matchupListBox;
         private Label teamOneName;
