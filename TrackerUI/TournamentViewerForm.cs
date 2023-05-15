@@ -49,16 +49,15 @@ namespace TrackerUI
                     rounds.Add(currRound);
                 }
             }
+            LoadMatchups(1);
         }
         private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadMatchups();
+            LoadMatchups((int)roundDropDown.SelectedItem);
         }
 
-        private void LoadMatchups()
+        private void LoadMatchups(int round)
         {
-            int round = (int)roundDropDown.SelectedItem;
-
             foreach (List<MatchupModel> matchups in tournament.Rounds)
             {
                 if (matchups.First().MatchupRound == round)
@@ -70,11 +69,10 @@ namespace TrackerUI
                     }
                 }
             }
+            LoadMatchup(selectedMatchups.First());
         }
-        public void LoadMatchup()
+        public void LoadMatchup(MatchupModel m)
         {
-            MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
-
             for (int i = 0; i < m?.Entries.Count; i++)
             {
                 if (i == 0)
@@ -135,7 +133,7 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadMatchup();
+            LoadMatchup((MatchupModel)matchupListBox.SelectedItem);
         }
 
         private void teamOneName_Click(object sender, EventArgs e)
