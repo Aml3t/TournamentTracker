@@ -133,6 +133,7 @@
             teamOneName.TabIndex = 6;
             teamOneName.Tag = "";
             teamOneName.Text = "<team one>";
+            teamOneName.Click += teamOneName_Click;
             // 
             // teamOneScoreLabel
             // 

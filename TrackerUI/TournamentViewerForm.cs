@@ -8,7 +8,6 @@ namespace TrackerUI
         List<int> rounds = new List<int>();
         List<MatchupModel> selectedMatchups = new List<MatchupModel>();
 
-
         public TournamentViewerForm(TournamentModel tournamentModel)
         {
             InitializeComponent();
@@ -24,15 +23,17 @@ namespace TrackerUI
             tournamentName.Text = tournament.TournamentName;
         }
 
-        private void WireUpLists()
+        private void WireUpRoundsLists()
         {
             roundDropDown.DataSource = null;
             roundDropDown.DataSource = rounds;
+        }
 
-            matchupListBox.DataSource = null ;
+        private void WireUpMatchupsList()
+        {
+            matchupListBox.DataSource = null;
             matchupListBox.DataSource = selectedMatchups;
-            matchupListBox.DisplayMember = "";
-
+            matchupListBox.DisplayMember = "DisplayName";
         }
         private void LoadRounds()
         {
@@ -49,9 +50,8 @@ namespace TrackerUI
                     rounds.Add(currRound);
                 }
             }
-            WireUpLists();
+            WireUpRoundsLists();
         }
-
         private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadMatchups();
@@ -68,8 +68,43 @@ namespace TrackerUI
                     selectedMatchups = matchups;
                 }
             }
+            WireUpMatchupsList();
         }
 
+        public void LoadMatchup()
+        {
+            MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
+
+            for (int i = 0; i < m.Entries.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (m.Entries[0].TeamCompeting.TeamName != null)
+                    {
+                        teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
+                        TeamOneScoreValue.Text = m.Entries[0].Score.ToString();
+                    }
+                    else
+                    {
+                        teamOneName.Text = "NOT YET SET";
+                        TeamOneScoreValue.Text = "";
+                    }
+                }
+                if (i == 1)
+                {
+                    if (m.Entries[0].TeamCompeting.TeamName != null)
+                    {
+                        teamTwoName.Text = m.Entries[1].TeamCompeting.TeamName;
+                        TeamTwoScoreValue.Text = m.Entries[1].Score.ToString();
+                    }
+                    else
+                    {
+                        teamTwoName.Text = "NOT YET SET";
+                        TeamTwoScoreValue.Text = "";
+                    }
+                }
+            }
+        }
         private void TournamentViewerForm_Load(object sender, EventArgs e)
         {
 
@@ -97,9 +132,12 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            LoadMatchup();
         }
 
+        private void teamOneName_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
