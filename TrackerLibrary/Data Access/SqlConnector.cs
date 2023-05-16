@@ -304,7 +304,21 @@ namespace TrackerLibrary
 
         public void UpdateMatchupModel(MatchupModel model)
         {
-            //dbo.spMatchups_Update  @id, @WinnerId
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@id", model.Id);
+                p.Add("@WinnerId", model.Winner.Id);
+                connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
+
+                //    dbo.spMatchupEntries_update
+                //@id int,
+                //@TeamCompetingID int = null,
+                //@Score float = null
+
+
+            }
         }
     }
 }
