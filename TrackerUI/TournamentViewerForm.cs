@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using TrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -230,6 +231,8 @@ namespace TrackerUI
             }
 
             LoadMatchups((int)roundDropDown.SelectedItem);
+
+            GlobalConfig.Connection.UpdateMatchupModel(m);
         }
     }
 }

@@ -310,14 +310,20 @@ namespace TrackerLibrary
 
                 p.Add("@id", model.Id);
                 p.Add("@WinnerId", model.Winner.Id);
+
                 connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
 
-                //    dbo.spMatchupEntries_update
-                //@id int,
-                //@TeamCompetingID int = null,
-                //@Score float = null
+                foreach (MatchupEntryModel me in model.Entries)
+                {
+                    p = new DynamicParameters();
 
+                    p.Add("@id", me.Id);
+                    if (me.TeamCompetingId != 0)
+                    p.Add("@TeamCompetingID", me.TeamCompetingId);
+                    p.Add("Score", me.Score);
 
+                    connection.Execute("dbo.spMatchupEntries_update", p, commandType: CommandType.StoredProcedure);
+                }
             }
         }
     }
