@@ -72,8 +72,24 @@ namespace TrackerUI
                     }
                 }
             }
-            LoadMatchup(selectedMatchups.First());
+            if (selectedMatchups.Count > 0)
+            {
+                LoadMatchup(selectedMatchups.First());
+            }
+
+            DisplayMatchupInfo();
         }
+
+        private void DisplayMatchupInfo()
+        {
+            bool isVisible = selectedMatchups.Count > 0;
+
+            teamOneName.Visible = isVisible;
+            teamOneScoreLabel.Visible = isVisible;
+            TeamOneScoreValue.Visible = isVisible;
+
+        }
+
         public void LoadMatchup(MatchupModel m)
         {
             for (int i = 0; i < m?.Entries.Count; i++)
@@ -198,11 +214,15 @@ namespace TrackerUI
             {
                 m.Winner = m.Entries[0].TeamCompeting;
             }
-            else
+            else if (teamTwoScore > teamOneScore)
             {
                 m.Winner = m.Entries[1].TeamCompeting;
-            }
 
+            }
+            else
+            {
+                MessageBox.Show("Tie games is not tolerated.");
+            }
         }
     }
 }
