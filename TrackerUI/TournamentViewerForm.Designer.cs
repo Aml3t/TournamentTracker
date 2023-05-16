@@ -39,7 +39,7 @@
             teamOneScoreLabel = new Label();
             teamOneScoreValue = new TextBox();
             teamTwoScoreValue = new TextBox();
-            TeamTwoScoreLabel = new Label();
+            teamTwoScoreLabel = new Label();
             teamTwoName = new Label();
             versusLabel = new Label();
             scoreButton = new Button();
@@ -166,18 +166,18 @@
             teamTwoScoreValue.Tag = "";
             teamTwoScoreValue.Text = "<score>";
             // 
-            // TeamTwoScoreLabel
+            // teamTwoScoreLabel
             // 
-            TeamTwoScoreLabel.AutoSize = true;
-            TeamTwoScoreLabel.BackColor = Color.White;
-            TeamTwoScoreLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TeamTwoScoreLabel.ForeColor = SystemColors.MenuHighlight;
-            TeamTwoScoreLabel.Location = new Point(409, 407);
-            TeamTwoScoreLabel.Name = "TeamTwoScoreLabel";
-            TeamTwoScoreLabel.Size = new Size(82, 37);
-            TeamTwoScoreLabel.TabIndex = 10;
-            TeamTwoScoreLabel.Tag = "";
-            TeamTwoScoreLabel.Text = "Score";
+            teamTwoScoreLabel.AutoSize = true;
+            teamTwoScoreLabel.BackColor = Color.White;
+            teamTwoScoreLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            teamTwoScoreLabel.ForeColor = SystemColors.MenuHighlight;
+            teamTwoScoreLabel.Location = new Point(409, 407);
+            teamTwoScoreLabel.Name = "teamTwoScoreLabel";
+            teamTwoScoreLabel.Size = new Size(82, 37);
+            teamTwoScoreLabel.TabIndex = 10;
+            teamTwoScoreLabel.Tag = "";
+            teamTwoScoreLabel.Text = "Score";
             // 
             // teamTwoName
             // 
@@ -231,7 +231,7 @@
             Controls.Add(scoreButton);
             Controls.Add(versusLabel);
             Controls.Add(teamTwoScoreValue);
-            Controls.Add(TeamTwoScoreLabel);
+            Controls.Add(teamTwoScoreLabel);
             Controls.Add(teamTwoName);
             Controls.Add(teamOneScoreValue);
             Controls.Add(teamOneScoreLabel);
@@ -270,5 +270,6 @@
         private Button scoreButton;
         private TextBox teamOneScoreValue;
         private TextBox teamTwoScoreValue;
+        private Label teamTwoScoreLabel;
     }
 }

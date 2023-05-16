@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary
@@ -299,6 +300,11 @@ namespace TrackerLibrary
 
             }
             return output;
+        }
+
+        public void UpdateMatchupModel(MatchupModel model)
+        {
+            //dbo.spMatchups_Update  @id, @WinnerId
         }
     }
 }

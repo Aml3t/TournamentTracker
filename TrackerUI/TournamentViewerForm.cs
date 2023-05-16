@@ -82,12 +82,18 @@ namespace TrackerUI
 
         private void DisplayMatchupInfo()
         {
-            bool isVisible = selectedMatchups.Count > 0;
+            bool isVisible = (selectedMatchups.Count > 0);
 
             teamOneName.Visible = isVisible;
             teamOneScoreLabel.Visible = isVisible;
-            TeamOneScoreValue.Visible = isVisible;
+            teamOneScoreValue.Visible = isVisible;
 
+            teamTwoName.Visible = isVisible;
+            teamTwoScoreLabel.Visible = isVisible;
+            teamTwoScoreValue.Visible = isVisible;
+
+            versusLabel.Visible = isVisible;
+            scoreButton.Visible = isVisible;
         }
 
         public void LoadMatchup(MatchupModel m)
@@ -99,10 +105,10 @@ namespace TrackerUI
                     if (m.Entries[0].TeamCompeting.TeamName != null)
                     {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
-                        TeamOneScoreValue.Text = m.Entries[0].Score.ToString();
+                        teamOneScoreValue.Text = m.Entries[0].Score.ToString();
 
                         teamTwoName.Text = "<bye>";
-                        TeamTwoScoreValue.Text = "0";
+                        teamTwoScoreValue.Text = "0";
                     }
                     else
                     {
@@ -115,7 +121,7 @@ namespace TrackerUI
                     if (m.Entries[0].TeamCompeting.TeamName != null)
                     {
                         teamTwoName.Text = m.Entries[1].TeamCompeting.TeamName;
-                        TeamTwoScoreValue.Text = m.Entries[1].Score.ToString();
+                        teamTwoScoreValue.Text = m.Entries[1].Score.ToString();
                     }
                     else
                     {
@@ -171,13 +177,13 @@ namespace TrackerUI
             double teamOneScore = 0;
             double teamTwoScore = 0;
 
-            for (int i = 0; i < m?.Entries.Count; i++)
+            for (int i = 0; i < m.Entries.Count; i++)
             {
                 if (i == 0)
                 {
-                    if (m.Entries[0].TeamCompeting.TeamName != null)
+                    if (m.Entries[0].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(TeamOneScoreValue.Text, out teamOneScore);
+                        bool scoreValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
 
                         if (scoreValid)
                         {
@@ -193,9 +199,9 @@ namespace TrackerUI
 
                 if (i == 1)
                 {
-                    if (m.Entries[1].TeamCompeting.TeamName != null)
+                    if (m.Entries[1].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(TeamTwoScoreValue.Text, out teamTwoScore);
+                        bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
 
                         if (scoreValid)
                         {
@@ -217,12 +223,13 @@ namespace TrackerUI
             else if (teamTwoScore > teamOneScore)
             {
                 m.Winner = m.Entries[1].TeamCompeting;
-
             }
             else
             {
                 MessageBox.Show("Tie games is not tolerated.");
             }
+
+            LoadMatchups((int)roundDropDown.SelectedItem);
         }
     }
 }
