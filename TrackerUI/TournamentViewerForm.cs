@@ -96,42 +96,51 @@ namespace TrackerUI
             versusLabel.Visible = isVisible;
             scoreButton.Visible = isVisible;
         }
-
-        public void LoadMatchup(MatchupModel m)
+        private void LoadMatchup(MatchupModel m)
         {
-            for (int i = 0; i < m?.Entries.Count; i++)
+            // Addition to code due to Null reference problems.
+            if (m == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < m.Entries.Count; i++)
             {
                 if (i == 0)
                 {
-                    if (m.Entries[0].TeamCompeting.TeamName != null)
+                    if (m.Entries[0]?.TeamCompeting != null)
                     {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
                         teamOneScoreValue.Text = m.Entries[0].Score.ToString();
 
                         teamTwoName.Text = "<bye>";
                         teamTwoScoreValue.Text = "0";
+
                     }
                     else
                     {
-                        teamOneName.Text = "NOT YET SET";
-                        TeamOneScoreValue.Text = "";
+                        teamOneName.Text = "Not yet Set";
+                        teamOneScoreValue.Text = "";
                     }
                 }
+
                 if (i == 1)
                 {
-                    if (m.Entries[0].TeamCompeting.TeamName != null)
+                    if (m.Entries[1].TeamCompeting != null)
                     {
                         teamTwoName.Text = m.Entries[1].TeamCompeting.TeamName;
                         teamTwoScoreValue.Text = m.Entries[1].Score.ToString();
+
                     }
                     else
                     {
-                        teamTwoName.Text = "NOT YET SET";
-                        TeamTwoScoreValue.Text = "";
+                        teamTwoName.Text = "Not yet Set";
+                        teamTwoScoreValue.Text = "";
                     }
                 }
             }
         }
+
         private void TournamentViewerForm_Load(object sender, EventArgs e)
         {
 
@@ -228,6 +237,25 @@ namespace TrackerUI
             else
             {
                 MessageBox.Show("Tie games is not tolerated.");
+            }
+
+            foreach (List<MatchupModel> round in tournament.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    foreach (MatchupEntryModel me in rm.Entries)
+                    {
+                        if (me.ParentMatchup != null)
+                        {
+                            if (me.ParentMatchup.Id == rm.Id)
+                            {
+                                me.TeamCompeting = m.Winner;
+                                GlobalConfig.Connection.UpdateMatchupModel(rm);
+                            }
+                        }
+
+                    }
+                }
             }
 
             LoadMatchups((int)roundDropDown.SelectedItem);

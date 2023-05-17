@@ -307,22 +307,26 @@ namespace TrackerLibrary
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
             {
                 var p = new DynamicParameters();
+                if (model.Winner != null)
+                {
+                    p.Add("@id", model.Id);
+                    p.Add("@WinnerId", model.Winner.Id);
 
-                p.Add("@id", model.Id);
-                p.Add("@WinnerId", model.Winner.Id);
+                    connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
 
-                connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
+                }
 
                 foreach (MatchupEntryModel me in model.Entries)
                 {
-                    p = new DynamicParameters();
+                    if (me.TeamCompeting != null)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@id", me.Id);
+                        p.Add("@TeamCompetingID", me.TeamCompetingId);
+                        p.Add("Score", me.Score);
 
-                    p.Add("@id", me.Id);
-                    if (me.TeamCompetingId != 0)
-                    p.Add("@TeamCompetingID", me.TeamCompetingId);
-                    p.Add("Score", me.Score);
-
-                    connection.Execute("dbo.spMatchupEntries_update", p, commandType: CommandType.StoredProcedure);
+                        connection.Execute("dbo.spMatchupEntries_update", p, commandType: CommandType.StoredProcedure);
+                    }
                 }
             }
         }
