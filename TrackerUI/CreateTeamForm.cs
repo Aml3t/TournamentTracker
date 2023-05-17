@@ -77,8 +77,8 @@ namespace TrackerUI
 
             team.TeamName = teamNameValue.Text;
             team.TeamMembers = selectedTeamMembers;
-
-            team = GlobalConfig.Connection.CreateTeam(team);
+            // TODO Have to check this
+            GlobalConfig.Connection.CreateTeam(team);
 
             calling.TeamComplete(team);
             this.Close();
@@ -94,7 +94,7 @@ namespace TrackerUI
                 p.EmailAddress = emailValue.Text;
                 p.CellphoneNumber = cellphoneValue.Text;
 
-                p = GlobalConfig.Connection.CreatePerson(p);
+                GlobalConfig.Connection.CreatePerson(p);
 
                 selectedTeamMembers.Add(p);
                 WireUpLists();

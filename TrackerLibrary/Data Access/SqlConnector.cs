@@ -12,7 +12,7 @@ namespace TrackerLibrary
 {
     public class SqlConnector : IDataConnection
     {
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
             {
@@ -26,8 +26,6 @@ namespace TrackerLibrary
                 connection.Execute("spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
-
-                return model;
             }
         }
         /// <summary>
@@ -37,7 +35,7 @@ namespace TrackerLibrary
         /// <returns>The prize information, with the unique identifier.</returns>
 
         //public string Information { get; private set; } = "SQL"; My addon for user notification.
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments"))
 )
@@ -51,11 +49,9 @@ namespace TrackerLibrary
 
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
-
-                return model;
             }
         }
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
             {
@@ -77,7 +73,6 @@ namespace TrackerLibrary
                     //model.Id = p.Get<int>("@id");
 
                 }
-                return model;
             }
         }
 
