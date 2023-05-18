@@ -23,6 +23,7 @@ namespace TrackerLibrary
             model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
 
             CreateOtherRounds(model, rounds);
+
         }
 
         public static void UpdateTournamentResults(TournamentModel model)
@@ -72,62 +73,115 @@ namespace TrackerLibrary
             }
 
         }
+
+        /// <summary>
+        /// MarkWinnersInMatchups method with switch statements.
+        /// </summary>
+        /// <param name="models"></param>
+        /// <exception cref="Exception"></exception>
+        /// 
+        //private static void MarkWinnersInMatchups(List<MatchupModel> models)
+        //{
+        //    // Checking the score mechanism. If "lesser" then the lowest score makes the winner.
+        //    //  If "greater" then the higher score makes the winner.
+
+        //    string scoreDirection = ConfigurationManager.AppSettings["winnerDetermination"];
+
+        //    foreach (MatchupModel m in models)
+        //    {
+        //        // Checking the bye week entry
+
+        //        if (m.Entries.Count == 1)
+        //        {
+        //            m.Winner = m.Entries[0].TeamCompeting;
+        //        }
+
+        //        switch (scoreDirection)
+        //        {
+        //            case "lesser":
+
+        //                if (m.Entries[0].Score < m.Entries[1].Score)
+        //                {
+        //                    m.Winner = m.Entries[0].TeamCompeting;
+        //                }
+        //                else if (m.Entries[1].Score < m.Entries[0].Score)
+        //                {
+        //                    m.Winner = m.Entries[1].TeamCompeting;
+        //                }
+        //                else
+        //                {
+        //                    throw new Exception("No ties allowed in this application.");
+        //                }
+        //                break;
+
+        //            case "greater":
+
+        //                if (m.Entries[0].Score > m.Entries[1].Score)
+        //                {
+        //                    m.Winner = m.Entries[0].TeamCompeting;
+        //                }
+        //                else if (m.Entries[1].Score > m.Entries[0].Score)
+        //                {
+        //                    m.Winner = m.Entries[1].TeamCompeting;
+        //                }
+        //                else
+        //                {
+        //                    throw new Exception("No ties allowed in this application.");
+        //                }
+        //                break;
+
+        //            default:
+
+        //                throw new Exception("Invalid winnerDetermination value. Check your settings.");
+        //        }
+        //    }
+        //}
+
         private static void MarkWinnersInMatchups(List<MatchupModel> models)
         {
-            // Checking the score mechanism. If "lesser" then the lowest score makes the winner.
-            //  If "greater" then the higher score makes the winner.
+            // greater or lesser
+            string greaterWins = ConfigurationManager.AppSettings["greaterWins"];
 
-            string scoreDirection = ConfigurationManager.AppSettings["winnerDetermination"];
 
             foreach (MatchupModel m in models)
             {
-                // Checking the bye week entry
-
+                // Check the bye week entry
                 if (m.Entries.Count == 1)
                 {
                     m.Winner = m.Entries[0].TeamCompeting;
+                    continue;
                 }
-
-                switch (scoreDirection)
+                // 0 means false, or low score wins
+                if (greaterWins == "0")
                 {
-                    case "lesser":
+                    if (m.Entries[0].Score < m.Entries[1].Score)
+                    {
+                        m.Winner = m.Entries[0].TeamCompeting;
+                    }
+                    else if (m.Entries[1].Score < m.Entries[0].Score)
+                    {
+                        m.Winner = m.Entries[1].TeamCompeting;
+                    }
+                    else
+                    {
+                        throw new Exception("We do not allow ties in this application.");
+                    }
+                }
+                else
+                {
 
-                        if (m.Entries[0].Score < m.Entries[1].Score)
-                        {
-                            m.Winner = m.Entries[0].TeamCompeting;
-                        }
-                        else if (m.Entries[1].Score < m.Entries[0].Score)
-                        {
-                            m.Winner = m.Entries[1].TeamCompeting;
-                        }
-                        else
-                        {
-                            throw new Exception("No ties allowed in this application.");
-                        }
-
-                        break;
-
-                    case "greater":
-
-                        if (m.Entries[0].Score > m.Entries[1].Score)
-                        {
-                            m.Winner = m.Entries[0].TeamCompeting;
-                        }
-                        else if (m.Entries[1].Score > m.Entries[0].Score)
-                        {
-                            m.Winner = m.Entries[1].TeamCompeting;
-                        }
-                        else
-                        {
-                            throw new Exception("No ties allowed in this application.");
-                        }
-
-                        break;
-
-                    default:
-
-                        throw new Exception("Invalid winnerDetermination value. Check your settings.");
-                        break;
+                    if (m.Entries[0].Score > m.Entries[1].Score)
+                    {
+                        m.Winner = m.Entries[0].TeamCompeting;
+                    }
+                    else if (m.Entries[1].Score > m.Entries[0].Score)
+                    {
+                        m.Winner = m.Entries[1].TeamCompeting;
+                    }
+                    else
+                    {
+                        throw new Exception("We do not allow ties in this application.");
+                    }
                 }
             }
         }
@@ -216,7 +270,5 @@ namespace TrackerLibrary
         {
             return teams.OrderBy(x => Guid.NewGuid()).ToList();
         }
-
-
     }
 }
