@@ -297,7 +297,7 @@ namespace TrackerLibrary
             return output;
         }
 
-        public void UpdateMatchupModel(MatchupModel model)
+        public void UpdateMatchup(MatchupModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
             {

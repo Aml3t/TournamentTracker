@@ -115,7 +115,7 @@ namespace TrackerLibrary
                 .ConvertToTournamentModels();
         }
 
-        public void UpdateMatchupModel(MatchupModel model)
+        public void UpdateMatchup(MatchupModel model)
         {
             model.UpdateMatchupToFile();
         }
