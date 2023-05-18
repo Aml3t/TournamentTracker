@@ -24,6 +24,56 @@ namespace TrackerLibrary
             CreateOtherRounds(model, rounds);
         }
 
+        public static void UpdateTournamentResults(TournamentModel model)
+        {
+            List<MatchupModel> toScore = new List<MatchupModel>();
+
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    if ( rm.Winner == null && (rm.Entries.Any(x => x.Id != 0) || rm.Entries.Count ==1))
+                    {
+                        toScore.Add(rm);
+                    }
+                }
+            }
+
+            //if (teamOneScore > teamTwoScore)
+            //{
+            //    m.Winner = m.Entries[0].TeamCompeting;
+            //}
+            //else if (teamTwoScore > teamOneScore)
+            //{
+            //    m.Winner = m.Entries[1].TeamCompeting;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Tie games is not tolerated.");
+            //}
+
+            //foreach (List<MatchupModel> round in model.Rounds)
+            //{
+            //    foreach (MatchupModel rm in round)
+            //    {
+            //        foreach (MatchupEntryModel me in rm.Entries)
+            //        {
+            //            if (me.ParentMatchup != null)
+            //            {
+            //                if (me.ParentMatchup.Id == rm.Id)
+            //                {
+            //                    me.TeamCompeting = m.Winner;
+            //                    GlobalConfig.Connection.UpdateMatchupModel(rm);
+            //                }
+            //            }
+
+            //        }
+            //    }
+            //}
+
+            //GlobalConfig.Connection.UpdateMatchupModel(m);
+        }
+
         private static void CreateOtherRounds(TournamentModel model, int rounds)
         {
             int round = 2;
@@ -108,5 +158,7 @@ namespace TrackerLibrary
         {
             return teams.OrderBy(x => Guid.NewGuid()).ToList();
         }
+
+
     }
 }
