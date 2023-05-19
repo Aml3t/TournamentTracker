@@ -181,8 +181,43 @@ namespace TrackerUI
             LoadMatchups((int)roundDropDown.SelectedItem);
         }
 
+        private string ValidateData()
+        {
+            string output = "";
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+
+            bool scoreOneValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
+            bool scoreTwoValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
+
+            if (!scoreOneValid)
+            {
+                output = "The score one value is not valid number";
+            }
+            else if (!scoreTwoValid)
+            {
+                output = "The score two value is not valid number";
+            }
+            else if (teamOneScore == 0 && teamTwoScore == 0)
+            {
+                output = "You did not enter a score for either team";
+            }
+            else if (teamOneScore == teamTwoScore)
+            {
+                output = "We do not allow tie games";
+            }
+            return output;
+        }
+
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            string errorMessage = ValidateData();
+
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show($"Input Error: {errorMessage}");
+                return;
+            }
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
             double teamOneScore = 0;
             double teamTwoScore = 0;
@@ -225,8 +260,15 @@ namespace TrackerUI
                     }
                 }
             }
+            try
+            {
+                TournamentLogic.UpdateTournamentResults(tournament);
+            }
+            catch (Exception ex)
+            {
 
-            TournamentLogic.UpdateTournamentResults(tournament);
+                MessageBox.Show($"You have the following error: {ex.Message}");
+            }
 
             LoadMatchups((int)roundDropDown.SelectedItem);
         }

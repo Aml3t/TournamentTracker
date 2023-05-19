@@ -32,7 +32,7 @@
             teamNameValue = new TextBox();
             teamNameLabel = new Label();
             createTeamLabel = new Label();
-            addMemberButton = new Button();
+            addTeamMemberButton = new Button();
             selectTeamMemberDropDown = new ComboBox();
             selectTeamMemberLabel = new Label();
             addNewMemberBox = new GroupBox();
@@ -87,21 +87,21 @@
             createTeamLabel.Text = "Create Team";
             createTeamLabel.Click += headerLabel_Click;
             // 
-            // addMemberButton
+            // addTeamMemberButton
             // 
-            addMemberButton.FlatAppearance.BorderColor = Color.Silver;
-            addMemberButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
-            addMemberButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
-            addMemberButton.FlatStyle = FlatStyle.Flat;
-            addMemberButton.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            addMemberButton.ForeColor = SystemColors.MenuHighlight;
-            addMemberButton.Location = new Point(84, 271);
-            addMemberButton.Name = "addMemberButton";
-            addMemberButton.Size = new Size(173, 54);
-            addMemberButton.TabIndex = 19;
-            addMemberButton.Text = "Add Member";
-            addMemberButton.UseVisualStyleBackColor = true;
-            addMemberButton.Click += addMemberButton_Click;
+            addTeamMemberButton.FlatAppearance.BorderColor = Color.Silver;
+            addTeamMemberButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
+            addTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
+            addTeamMemberButton.FlatStyle = FlatStyle.Flat;
+            addTeamMemberButton.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            addTeamMemberButton.ForeColor = SystemColors.MenuHighlight;
+            addTeamMemberButton.Location = new Point(84, 271);
+            addTeamMemberButton.Name = "addTeamMemberButton";
+            addTeamMemberButton.Size = new Size(173, 54);
+            addTeamMemberButton.TabIndex = 19;
+            addTeamMemberButton.Text = "Add Member";
+            addTeamMemberButton.UseVisualStyleBackColor = true;
+            addTeamMemberButton.Click += addTeamMemberButton_Click;
             // 
             // selectTeamMemberDropDown
             // 
@@ -272,7 +272,7 @@
             createTeamButton.TabIndex = 25;
             createTeamButton.Text = "Create Team";
             createTeamButton.UseVisualStyleBackColor = true;
-            createTeamButton.Click += createTournamentButton_Click;
+            createTeamButton.Click += createTeamButton_Click;
             // 
             // removeSelected
             // 
@@ -300,7 +300,7 @@
             Controls.Add(createTeamButton);
             Controls.Add(teamMembersListBox);
             Controls.Add(addNewMemberBox);
-            Controls.Add(addMemberButton);
+            Controls.Add(addTeamMemberButton);
             Controls.Add(selectTeamMemberDropDown);
             Controls.Add(selectTeamMemberLabel);
             Controls.Add(teamNameValue);
@@ -322,7 +322,7 @@
         private TextBox teamNameValue;
         private Label teamNameLabel;
         private Label createTeamLabel;
-        private Button addMemberButton;
+        private Button addTeamMemberButton;
         private ComboBox selectTeamMemberDropDown;
         private Label selectTeamMemberLabel;
         private GroupBox addNewMemberBox;

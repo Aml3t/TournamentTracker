@@ -25,8 +25,9 @@ namespace TrackerUI
         {
             InitializeComponent();
             //CreateSampleData();
-            WireUpLists();
             calling = caller;
+
+            WireUpLists();
         }
 
         private void CreateSampleData()
@@ -39,18 +40,16 @@ namespace TrackerUI
         }
         private void WireUpLists()
         {
-            selectTeamMemberDropDown.DataSource = null; // It could me ... new List<string>();
-
+            selectTeamMemberDropDown.DataSource = null; // It could be ... new List<string>();
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
 
             teamMembersListBox.DataSource = null;
-
             teamMembersListBox.DataSource = selectedTeamMembers;
             teamMembersListBox.DisplayMember = "FullName";
 
 
-            selectTeamMemberDropDown.Refresh();
+            // TODO - selectTeamMemberDropDown.Refresh();
         }
 
         private void headerLabel_Click(object sender, EventArgs e)
@@ -71,7 +70,7 @@ namespace TrackerUI
 
         }
 
-        private void createTournamentButton_Click(object sender, EventArgs e)
+        private void createTeamButton_Click(object sender, EventArgs e)
         {
             TeamModel team = new TeamModel();
 
@@ -143,7 +142,7 @@ namespace TrackerUI
             return true;
         }
 
-        private void addMemberButton_Click(object sender, EventArgs e)
+        private void addTeamMemberButton_Click(object sender, EventArgs e)
         {
             PersonModel p = (PersonModel)selectTeamMemberDropDown.SelectedItem;
 
@@ -180,5 +179,6 @@ namespace TrackerUI
         {
             throw new NotImplementedException();
         }
+
     }
 }

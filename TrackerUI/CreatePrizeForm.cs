@@ -54,7 +54,6 @@ namespace TrackerUI
                 MessageBox.Show("Invalid information. Please check again");
             }
         }
-
         private bool ValidateForm()
         {
             bool output = true;
@@ -106,27 +105,22 @@ namespace TrackerUI
 
             return output;
         }
-
         private void privePercentageValue_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void prizeAmountValue_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void placeNumberValue_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void placeNameValue_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void CreatePrizeForm_Load(object sender, EventArgs e)
         {
 

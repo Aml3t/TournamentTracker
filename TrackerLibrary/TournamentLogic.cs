@@ -25,7 +25,6 @@ namespace TrackerLibrary
             CreateOtherRounds(model, rounds);
 
         }
-
         public static void UpdateTournamentResults(TournamentModel model)
         {
             List<MatchupModel> toScore = new List<MatchupModel>();
@@ -34,7 +33,7 @@ namespace TrackerLibrary
             {
                 foreach (MatchupModel rm in round)
                 {
-                    if ( rm.Winner == null && (rm.Entries.Any(x => x.Id != 0) || rm.Entries.Count ==1))
+                    if ( rm.Winner == null && rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1)
                     {
                         toScore.Add(rm);
                     }
@@ -82,23 +81,23 @@ namespace TrackerLibrary
         /// 
         //private static void MarkWinnersInMatchups(List<MatchupModel> models)
         //{
-        //    // Checking the score mechanism. If "lesser" then the lowest score makes the winner.
-        //    //  If "greater" then the higher score makes the winner.
+        //    Checking the score mechanism. If "lesser" then the lowest score makes the winner.
+        //     If "greater" then the higher score makes the winner.
 
-        //    string scoreDirection = ConfigurationManager.AppSettings["winnerDetermination"];
+        //    string greaterWins = ConfigurationManager.AppSettings["greaterWins"];
 
         //    foreach (MatchupModel m in models)
         //    {
-        //        // Checking the bye week entry
+        //        Checking the bye week entry
 
         //        if (m.Entries.Count == 1)
         //        {
         //            m.Winner = m.Entries[0].TeamCompeting;
         //        }
 
-        //        switch (scoreDirection)
+        //        switch (greaterWins)
         //        {
-        //            case "lesser":
+        //            case "1":
 
         //                if (m.Entries[0].Score < m.Entries[1].Score)
         //                {
@@ -114,7 +113,7 @@ namespace TrackerLibrary
         //                }
         //                break;
 
-        //            case "greater":
+        //            case "0":
 
         //                if (m.Entries[0].Score > m.Entries[1].Score)
         //                {
@@ -141,7 +140,6 @@ namespace TrackerLibrary
         {
             // greater or lesser
             string greaterWins = ConfigurationManager.AppSettings["greaterWins"];
-
 
             foreach (MatchupModel m in models)
             {
