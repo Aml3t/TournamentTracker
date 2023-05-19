@@ -241,7 +241,6 @@ namespace TrackerUI
                         }
                     }
                 }
-
                 if (i == 1)
                 {
                     if (m.Entries[1].TeamCompeting != null)
@@ -268,6 +267,7 @@ namespace TrackerUI
             {
 
                 MessageBox.Show($"You have the following error: {ex.Message}");
+                return;
             }
 
             LoadMatchups((int)roundDropDown.SelectedItem);
