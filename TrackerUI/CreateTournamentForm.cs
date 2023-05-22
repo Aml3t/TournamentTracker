@@ -154,10 +154,11 @@ namespace TrackerUI
             // Create all the team entries
             GlobalConfig.Connection.CreateTournament(tm);
 
+            tm.AlertUsersToNewRounds();
+
             TournamentViewerForm frm = new TournamentViewerForm(tm);
             frm.Show();
             this.Close();
-
         }
         private void entryFeeValue_TextChanged(object sender, EventArgs e)
         {
