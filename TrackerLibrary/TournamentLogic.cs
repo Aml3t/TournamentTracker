@@ -51,8 +51,62 @@ namespace TrackerLibrary
             {
                 //EmailLogic.SendEmail();
             }
-
         }
+
+        private static void AlertUsersToNewRounds(this TournamentModel model)
+        {
+            int currentRoundNumber = model.CheckCurrentRound();
+            List<MatchupModel> currentRound = model.Rounds.Where
+                (x => x.First().MatchupRound == currentRoundNumber).First();
+
+            foreach (MatchupModel matchup in currentRound)
+            {
+                foreach (MatchupEntryModel me in matchup.Entries)
+                {
+                    foreach (PersonModel p in me.TeamCompeting.TeamMembers)
+                    {
+                        AlertPersonToNewRounds(p, me.TeamCompeting.TeamName, matchup.Entries.Where(
+                                        x => x.TeamCompeting != me.TeamCompeting).FirstOrDefault());
+                    }
+                }
+            }
+        }
+
+        private static void AlertPersonToNewRounds(PersonModel p,
+                            string teamName, MatchupEntryModel? competitor)
+        {
+            if (p.EmailAddress.Length == 0)
+            {
+                return;
+            }
+            string from = "";
+            List<string> to = new List<string>();// { "1", "2" };
+            string subject = "";
+            StringBuilder body = new StringBuilder();
+
+            if (competitor != null)
+            {
+                subject = $"You have a new matchup with: {competitor.TeamCompeting.TeamName}";
+
+                body.AppendLine("<h1>You have a new matchup</h1>");
+                body.Append("<strong>Competitor: </strong>");
+                body.Append(competitor.TeamCompeting.TeamName);
+                body.AppendLine();
+                body.AppendLine();
+                body.AppendLine("Have a great time!");
+                body.AppendLine("~Tournament Tracker");
+            }
+            else
+            {
+                subject = "You have a buy week this round";
+                body.AppendLine("Enjoy your round off!");
+                body.AppendLine("~Tournament Tracker");
+            }
+
+            to.Add(p.EmailAddress);
+            EmailLogic.SendEmail(from, to, subject, body.ToString());
+        }
+
         private static int CheckCurrentRound(this TournamentModel model)
         {
             int output = 1;
@@ -67,6 +121,7 @@ namespace TrackerLibrary
 
             return output;
         }
+
         private static void AdvanceWinners(List<MatchupModel> models, TournamentModel tournament)
         {
 
@@ -93,7 +148,6 @@ namespace TrackerLibrary
             }
 
         }
-
         /// <summary>
         /// MarkWinnersInMatchups method with switch statements.
         /// </summary>
