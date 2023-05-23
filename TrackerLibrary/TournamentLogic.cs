@@ -128,7 +128,23 @@ namespace TrackerLibrary
 
         private static void CompleteTournament(TournamentModel model)
         {
-            //model.Active
+            GlobalConfig.Connection.CompleteTournament(model);
+            TeamModel winners = model.Rounds.Last().First().Winner;
+            TeamModel runnerUp = model.Rounds.Last().First().Entries.Where(x => x.TeamCompeting != winners).First().TeamCompeting;
+
+            decimal winnerPrize = 0;
+            decimal runnerUpPrize = 0;
+
+            if (model.Prizes.Count > 0)
+            {
+                decimal totalIncome = model.EnteredTeams.Count * model.EntryFee;
+
+                PrizeModel firstPlacePrize = model.Prizes.Where(x => x.PlaceNumber == 1).FirstOrDefault();
+                if (true)
+                {
+
+                }
+            }
         }
 
         private static void AdvanceWinners(List<MatchupModel> models, TournamentModel tournament)
