@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -325,6 +326,17 @@ namespace TrackerLibrary
                         connection.Execute("dbo.spMatchupEntries_update", p, commandType: CommandType.StoredProcedure);
                     }
                 }
+            }
+        }
+
+        public void CompleteTournament(TournamentModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                var p = new DynamicParameters();
+                p.Add("@id", model.Id);
+
+                connection.Execute("spTournaments_Complete", p, commandType: CommandType.StoredProcedure);
             }
         }
     }

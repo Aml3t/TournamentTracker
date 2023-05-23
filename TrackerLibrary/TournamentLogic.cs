@@ -115,11 +115,20 @@ namespace TrackerLibrary
             {
                 if (round.All(x => x.Winner != null))
                 {
-
+                    output += 1;
+                }
+                else
+                {
+                    return output;
                 }
             }
+            //Tournament is complete
+            //return CompleteTournament(model);
+        }
 
-            return output;
+        private static void CompleteTournament(TournamentModel model)
+        {
+            //model.Active
         }
 
         private static void AdvanceWinners(List<MatchupModel> models, TournamentModel tournament)
