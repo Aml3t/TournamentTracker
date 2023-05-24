@@ -43,6 +43,5 @@ namespace TrackerLibrary.Models
         {
             OnTournamentComplete?.Invoke(this, DateTime.Now);
         }
-
     }
 }

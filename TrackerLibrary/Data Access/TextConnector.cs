@@ -129,6 +129,17 @@ namespace TrackerLibrary
                 .LoadFile()
                 .ConvertToTournamentModels();
 
+
+            //List<TournamentModel> tournamentsToSave = new List<TournamentModel>();
+
+            //foreach (TournamentModel t in tournaments)
+            //{
+            //    if (t.Id != t.Id)
+            //    {
+            //        tournamentsToSave.Add(t);
+            //    }
+            //}
+
             tournaments.Remove(model);
 
             tournaments.SaveToTournamentFile();

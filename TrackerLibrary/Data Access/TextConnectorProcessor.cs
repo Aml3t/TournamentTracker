@@ -18,7 +18,7 @@ namespace TrackerLibrary.Data_Access.TextHelpers
     {
         public static string FullFilePath(this string fileName)
         {
-            return $"{ ConfigurationManager.AppSettings["filePath"] }\\{ fileName }";
+            return $"{ ConfigurationManager.AppSettings["filePath"] }\\ {fileName}";
         }
         public static List<string> LoadFile(this string file)
         {

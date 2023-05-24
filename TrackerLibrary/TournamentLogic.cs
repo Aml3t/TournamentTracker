@@ -75,36 +75,40 @@ namespace TrackerLibrary
         private static void AlertPersonToNewRounds(PersonModel p,
                             string teamName, MatchupEntryModel? competitor)
         {
-            if (p.EmailAddress.Length == 0)
+            if (p.EmailAddress.Length > 0)
             {
-                return;
-            }
-            string to = "";// { "1", "2" };
-            string subject = "";
-            StringBuilder body = new StringBuilder();
+                string to = "";
+                string subject = "";
+                StringBuilder body = new StringBuilder();
 
-            if (competitor != null)
+                if (competitor != null)
+                {
+                    subject = $"You have a new matchup with: {competitor.TeamCompeting.TeamName}";
+
+                    body.AppendLine("<h1>You have a new matchup</h1>");
+                    body.Append("<strong>Competitor: </strong>");
+                    body.Append(competitor.TeamCompeting.TeamName);
+                    body.AppendLine();
+                    body.AppendLine();
+                    body.AppendLine("Have a great time!");
+                    body.AppendLine("~Tournament Tracker");
+                }
+                else
+                {
+                    subject = "You have a buy week this round";
+                    body.AppendLine("Enjoy your round off!");
+                    body.AppendLine("~Tournament Tracker");
+                }
+
+                to = p.EmailAddress;
+
+                EmailLogic.SendEmail(to, subject, body.ToString());
+            }
+
+            if (p.CellphoneNumber.Length > 0)
             {
-                subject = $"You have a new matchup with: {competitor.TeamCompeting.TeamName}";
-
-                body.AppendLine("<h1>You have a new matchup</h1>");
-                body.Append("<strong>Competitor: </strong>");
-                body.Append(competitor.TeamCompeting.TeamName);
-                body.AppendLine();
-                body.AppendLine();
-                body.AppendLine("Have a great time!");
-                body.AppendLine("~Tournament Tracker");
+                SMSLogic.SendSMSMessage(p.CellphoneNumber, $"You have a new matchup with: {competitor.TeamCompeting.TeamName}");
             }
-            else
-            {
-                subject = "You have a buy week this round";
-                body.AppendLine("Enjoy your round off!");
-                body.AppendLine("~Tournament Tracker");
-            }
-
-            to = p.EmailAddress; 
-
-            EmailLogic.SendEmail(to, subject, body.ToString());
         }
 
         private static int CheckCurrentRound(this TournamentModel model)
@@ -195,6 +199,9 @@ namespace TrackerLibrary
             }
 
             EmailLogic.SendEmail(new List<string>(), bcc, subject, body.ToString());
+
+            // Complete Tournament
+            model.CompleteTournament();
         }
 
         private static decimal CalculatePrizePayout(this PrizeModel prize, decimal totalIncome)
